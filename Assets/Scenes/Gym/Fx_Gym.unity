@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 674760795}
   - component: {fileID: 674760794}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: PlaneParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +398,7 @@ Transform:
   m_GameObject: {fileID: 674760792}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -13.312413, y: 16.979362, z: -7.4329476}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
