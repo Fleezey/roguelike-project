@@ -12,11 +12,22 @@ public class VerticalBoxStart : MaterialPropertyDrawer
 
     #region
     public VerticalBoxStart(){
-        Col = new Color(GUI.backgroundColor.r / Dimmer, GUI.backgroundColor.b / Dimmer, GUI.backgroundColor.g / Dimmer, 1.0f);
+        Col = Color.white;
     }
 
     public VerticalBoxStart(string label) {
-        Col = new Color(GUI.backgroundColor.r / Dimmer, GUI.backgroundColor.b / Dimmer, GUI.backgroundColor.g / Dimmer, 1.0f);
+        Col = Color.white;
+        Label = label;
+    }
+
+    public VerticalBoxStart(float level) {
+        float dimmerValue = Mathf.Pow(Dimmer, level - 1.0f);
+        Col = new Color(GUI.backgroundColor.r / dimmerValue, GUI.backgroundColor.b / dimmerValue, GUI.backgroundColor.g / dimmerValue, 1.0f);
+    }
+
+    public VerticalBoxStart(string label, float level) {
+        float dimmerValue = Mathf.Pow(Dimmer, level - 1.0f);
+        Col = new Color(GUI.backgroundColor.r / dimmerValue, GUI.backgroundColor.b / dimmerValue, GUI.backgroundColor.g / dimmerValue, 1.0f);
         Label = label;
     }
 
@@ -29,6 +40,7 @@ public class VerticalBoxStart : MaterialPropertyDrawer
     public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor){
         GUI.backgroundColor = Col;
         GUILayout.BeginVertical("", GUI.skin.box);
+        GUI.backgroundColor = Color.white;
         if(Label != ""){
             EditorGUILayout.LabelField(Label, EditorStyles.boldLabel);
         }
@@ -36,7 +48,7 @@ public class VerticalBoxStart : MaterialPropertyDrawer
 
     public override float GetPropertyHeight(MaterialProperty prop, string label, MaterialEditor editor){
         return 0;
-    }
+    }  
 }
 
 public class VerticalBoxEnd : MaterialPropertyDrawer
