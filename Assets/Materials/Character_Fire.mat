@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Character_Fire
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 58b4347819ea4e740b6fd048904f94b2, type: 3}
   m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -53,6 +53,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FireMask:
+        m_Texture: {fileID: 2800000, guid: cc4f05fdcc4adf2419688da7b032e2b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FireMask2:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -123,6 +131,8 @@ Material:
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
     - _BlendMode: 0
+    - _BoxEnd1: 0
+    - _BoxStart1: 0
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -161,6 +171,29 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
+    - _FireHeight: 0.9
+    - _FireMaskEnd: 0
+    - _FireMaskEnd2: 0
+    - _FireMaskMainEnd: 0
+    - _FireMaskMainSize: 3
+    - _FireMaskMainSpeed: 0.5
+    - _FireMaskMainStart: 0
+    - _FireMaskPow: 0.85
+    - _FireMaskStart: 0
+    - _FireMaskStart2: 0
+    - _FireMaskSubEnd: 0
+    - _FireMaskSubSize: 2
+    - _FireMaskSubSpeed: 1
+    - _FireMaskSubStart: 0
+    - _FireShapeEnd: 0
+    - _FireShapeMoveEnd: 0
+    - _FireShapeMoveStart: 0
+    - _FireShapeStart: 0
+    - _FireWidth: 0.25
+    - _FireXPosition: 0.5
+    - _FireXPow: 1
+    - _FireYPosition: 0.875
+    - _FireYPow: 1
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -207,6 +240,8 @@ Material:
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 0
+    - _TestEnd: 0
+    - _TestStart: 0
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -231,12 +266,15 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.15566039, g: 0.9161137, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
+    - _FireScale: {r: 1, g: 1, b: 2, a: 0.75}
+    - _FireWiggle: {r: 0, g: 0, b: 0, a: 0.25}
+    - _FireWiggleSpeed: {r: 1, g: 1, b: 1, a: 5}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
