@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 958cfac336603284d947dda46f966b02
+=======
+guid: 16e9a8dfa22fd47439aee503fb9fd651
+>>>>>>> Add basic character controller
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
