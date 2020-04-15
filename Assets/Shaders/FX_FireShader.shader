@@ -17,6 +17,7 @@
         [VerticalBoxStart(Fire Mask)]_FireMaskStart("",int) = 0
         _FireMask ("Fire Texture", 2D) = "white" {}
         _FireMaskPow ("Fire Mask Pow", float) = 1.0
+        _FireDirection ("Fire Direction", range(0.0, 1.0)) = 0.0
             [VerticalBoxStart(Fire Mask Main, 2)]_FireMaskMainStart("",int) = 0
             _FireMaskMainSize ("Fire Mask Main Size", float) = 1.0
             _FireMaskMainSpeed ("Fire Mask Main Speed", float) = 1.0
@@ -33,6 +34,7 @@
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
+        Cull Off
 
         Pass {
             CGPROGRAM
@@ -44,6 +46,7 @@
                 #include "UnityCG.cginc"
 
                 static const float PI2 = 6.28318530718f;
+                static const float randomF = 0.9283017492835;
 
                 struct appdata_t {
                     float4 vertex : POSITION;
@@ -63,7 +66,7 @@
                 fixed4 _Color, _FireScale, _FireWiggle, _FireWiggleSpeed;
                 sampler2D _FireMask;
                 fixed4 _FireMask_ST;
-                fixed _FireWidth, _FireHeight, _FireXPosition, _FireYPosition, _FireXPow, _FireYPow;
+                fixed _FireWidth, _FireHeight, _FireXPosition, _FireYPosition, _FireXPow, _FireYPow, _FireDirection;
                 fixed _FireMaskPow, _FireMaskMainSize, _FireMaskSubSize, _FireMaskMainSpeed, _FireMaskSubSpeed;
 
                 v2f vert (appdata_t v)
@@ -80,12 +83,17 @@
 
                 fixed4 frag (v2f i) : COLOR
                 {
-                    fixed4 multMask = tex2D(_FireMask, i.textureUv * 1.0f/_FireMaskMainSize + fixed2(0.0f, (_Time.y/_FireMaskMainSize * _FireMaskMainSpeed)%1.0f));
-                    fixed4 multSubMask = tex2D(_FireMask, i.textureUv * 1.0f/_FireMaskSubSize + fixed2(0.0f, (_Time.y/_FireMaskSubSize * _FireMaskSubSpeed)%1.0f));
-                    float x = (i.uv.x - _FireXPosition) * 1.0f/(((1.0f - i.uv.y) * _FireScale.w * _FireWidth) + (i.uv.y * _FireScale.z * _FireWidth)) + _FireXPosition;
-                    float y = (i.uv.y - _FireYPosition) * 1.0f/(((1.0f - i.uv.x) * _FireScale.y * _FireHeight) + (i.uv.x * _FireScale.x * _FireHeight)) + _FireYPosition;
-                    x += ((1.0f - i.uv.y) * _FireWiggle.w * sin((_Time.y * _FireWiggleSpeed.w)%PI2)) + (i.uv.y * _FireWiggle.z * cos((_Time.y * _FireWiggleSpeed.z)%PI2));
-                    y += ((1.0f - i.uv.x) * _FireWiggle.y * sin((_Time.y * _FireWiggleSpeed.y)%PI2)) + (i.uv.x * _FireWiggle.x * cos((_Time.y * _FireWiggleSpeed.x)%PI2));
+                    fixed randomV = float(floor(pow(10, abs(floor(i.uv.x))) * randomF)%10) / 10.0;
+                    fixed2 moduloUv = fixed2(i.uv.x%1.0f, i.uv.y%1.0f);
+                    fixed2 direction = fixed2(cos(_FireDirection * PI2), sin(_FireDirection * PI2));
+                    fixed windMainSpeed = (_Time.y/_FireMaskMainSize * _FireMaskMainSpeed)%1.0;
+                    fixed windSubSpeed = (_Time.y/_FireMaskSubSize * _FireMaskSubSpeed)%1.0f;
+                    fixed4 multMask = tex2D(_FireMask, i.textureUv * 1.0f/_FireMaskMainSize + fixed2(windMainSpeed * direction.x + direction.x * randomV , windMainSpeed * direction.y + direction.y * randomV));
+                    fixed4 multSubMask = tex2D(_FireMask, i.textureUv * 1.0f/_FireMaskSubSize + fixed2(windSubSpeed * direction.x, windSubSpeed * direction.y));
+                    float x = (moduloUv.x - _FireXPosition) * 1.0f/(((1.0f - moduloUv.y) * _FireScale.w * _FireWidth) + (moduloUv.y * _FireScale.z * _FireWidth)) + _FireXPosition;
+                    float y = (moduloUv.y - _FireYPosition) * 1.0f/(((1.0f - moduloUv.x) * _FireScale.y * _FireHeight) + (moduloUv.x * _FireScale.x * _FireHeight)) + _FireYPosition;
+                    x += (((1.0f - moduloUv.y) * _FireWiggle.w * sin((_Time.y * _FireWiggleSpeed.w)%PI2)) + (moduloUv.y * _FireWiggle.z * cos((_Time.y * _FireWiggleSpeed.z)%PI2)));
+                    y += (((1.0f - moduloUv.x) * _FireWiggle.y * sin((_Time.y * _FireWiggleSpeed.y)%PI2)) + (moduloUv.x * _FireWiggle.x * cos((_Time.y * _FireWiggleSpeed.x)%PI2)));
                     
                     float maskMultiplier = pow(saturate(sqrt(pow((_FireXPosition - x), 2.0f) + pow((_FireYPosition - y), 2.0f))), _FireMaskPow);
 
