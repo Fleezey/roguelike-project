@@ -23,29 +23,39 @@ Material:
         m_Texture: {fileID: 2800000, guid: cc4f05fdcc4adf2419688da7b032e2b9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FireNorm:
+        m_Texture: {fileID: 2800000, guid: d50bc4f89ecda2d43b6ae65206895e92, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _FireDirection: 0.75
+    - _FireDisplacement: 3
+    - _FireDisplacementEnd: 0
+    - _FireDisplacementStart: 0
     - _FireHeight: 1
     - _FireMaskEnd: 0
     - _FireMaskMainEnd: 0
-    - _FireMaskMainSize: 1
+    - _FireMaskMainSize: 3
     - _FireMaskMainSpeed: 0.5
     - _FireMaskMainStart: 0
     - _FireMaskPow: 1
     - _FireMaskStart: 0
     - _FireMaskSubEnd: 0
-    - _FireMaskSubSize: 0.5
+    - _FireMaskSubSize: 0.2
     - _FireMaskSubSpeed: 0.2
     - _FireMaskSubStart: 0
+    - _FireMoveIntensity: 7.5
+    - _FireMovePow: 1.63
+    - _FireMoveSpeed: 2
     - _FireShapeEnd: 0
     - _FireShapeMoveEnd: 0
     - _FireShapeMoveStart: 0
     - _FireShapeStart: 0
-    - _FireWidth: 0.5
+    - _FireWidth: 0.9
     - _FireXPosition: 0.5
     - _FireYPosition: 0
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _FireScale: {r: 1, g: 1, b: 1, a: 1.12}
-    - _FireWiggle: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0.8209021, b: 1, a: 1}
+    - _FireScale: {r: 1, g: 1, b: 1, a: 0.3}
+    - _FireWiggle: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _FireWiggleSpeed: {r: 1, g: 1, b: 1, a: 1}
