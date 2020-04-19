@@ -154,10 +154,10 @@ MonoBehaviour:
   m_DefaultVolumeProfile: {fileID: 11400000, guid: f940a8037e6cda542891dc1aac1fa4e8,
     type: 2}
   m_DefaultLookDevProfile: {fileID: 0}
+  m_RenderPipelineEditorResources: {fileID: 11400000, guid: bf65aa0c6e3e70c4c8b484c4ddac473e,
+    type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
-    bitDatas:
-      data1: 70297877217101
-      data2: 4539628425463136256
+    bitDatas: {}
     lodBias: 1
     lodBiasMode: 0
     lodBiasQualityLevel: 0
@@ -166,9 +166,7 @@ MonoBehaviour:
     maximumLODLevelQualityLevel: 0
     materialQuality: 0
   m_RenderingPathDefaultBakedOrCustomReflectionFrameSettings:
-    bitDatas:
-      data1: 64942043591501
-      data2: 4539628424389459968
+    bitDatas: {}
     lodBias: 1
     lodBiasMode: 0
     lodBiasQualityLevel: 0
@@ -177,9 +175,7 @@ MonoBehaviour:
     maximumLODLevelQualityLevel: 0
     materialQuality: 0
   m_RenderingPathDefaultRealtimeReflectionFrameSettings:
-    bitDatas:
-      data1: 69554681159501
-      data2: 4539628424657895424
+    bitDatas: {}
     lodBias: 1
     lodBiasMode: 0
     lodBiasQualityLevel: 0
@@ -187,6 +183,7 @@ MonoBehaviour:
     maximumLODLevelMode: 0
     maximumLODLevelQualityLevel: 0
     materialQuality: 0
+  <frameSettingsHistory>k__BackingField: 0
   m_RenderPipelineSettings:
     supportShadowMask: 1
     supportSSR: 0
@@ -233,7 +230,6 @@ MonoBehaviour:
       planarReflectionCacheCompressed: 0
       skyReflectionSize: 256
       skyLightingOverrideLayerMask:
-        serializedVersion: 2
         m_Bits: 0
       supportFabricConvolution: 0
       maxDirectionalLightsOnScreen: 16
@@ -308,14 +304,14 @@ MonoBehaviour:
       - 8
       - 13
       DoFResolution: 040000000200000001000000
-      DoFHighQualityFiltering: 000101
+      DoFHighQualityFiltering: 
       MotionBlurSampleCount: 04000000080000000c000000
       BloomRes: 040000000200000002000000
-      BloomHighQualityFiltering: 000101
+      BloomHighQualityFiltering: 
       ChromaticAberrationMaxSamples: 03000000060000000c000000
     lightSettings:
       useContactShadow:
-        m_Values: 
+        m_Values: []
         m_SchemaId:
           m_Id: 
     maximumLODLevel:
@@ -331,9 +327,9 @@ MonoBehaviour:
         m_Id: With3Levels
     lightingQualitySettings:
       AOStepCount: 040000000600000010000000
-      AOFullRes: 000001
+      AOFullRes: 
       AOMaximumRadiusPixels: 200000002800000050000000
-      AOBilateralUpsample: 000101
+      AOBilateralUpsample: 
       AODirectionCount: 010000000200000004000000
       ContactShadowSampleCount: 060000000a00000010000000
       SSRMaxRaySteps: 100000002000000040000000
@@ -344,8 +340,10 @@ MonoBehaviour:
   m_DefaultMaterialQualityLevel: 4
   diffusionProfileSettings: {fileID: 0}
   diffusionProfileSettingsList:
-  - {fileID: 11400000, guid: 63475cce2845eb84a8a02a96fdc1f62c, type: 2}
-  - {fileID: 11400000, guid: 8fe439135a061754386ae5839f4dc937, type: 2}
+  - {fileID: 11400000, guid: 9f5474f2154362641ae891e92301d7ee, type: 2}
+  - {fileID: 11400000, guid: c673046b754423f49b50e2759c6c56cb, type: 2}
   beforeTransparentCustomPostProcesses: []
   beforePostProcessCustomPostProcesses: []
   afterPostProcessCustomPostProcesses: []
+  defineArray:
+  - 
