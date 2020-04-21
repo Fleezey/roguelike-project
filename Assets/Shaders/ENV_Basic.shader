@@ -12,13 +12,13 @@ Shader "ENV/Basic"
 		[VerticalBoxStart(Normal)]_NormalStart("",int) = 0
         [NoScaleOffset]_BumpMap ("Normal Map", 2D) = "white" {}
         _BumpIntensity ("Normal Intensity", Range(0.001, 10.0)) = 1.0
-		[VerticalBoxEnd]_NormalEnd("",int) = 0
+		[VerticalBoxEnd]_NormalEnd("",int) = 0	
 		
 		[VerticalBoxStart(Ambient Roughness Metallic)]_ARMStart("",int) = 0
         [NoScaleOffset]_ARMMap ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
         _AmbientIntensity ("Ambient Occlusion Intensity", Range(0.0, 10.0)) = 1.0
 		_Metallic ("Metallic", Range(0, 1)) = 1
-		_Roughness ("Roughness", Range(0, 1)) = 0.8
+		_Roughness ("Roughness", float) = 0.5
 		[VerticalBoxEnd]_ARMEnd("",int) = 0
 
 		[VerticalBoxStart(Lighting)]_LightingStart("",int) = 0
@@ -27,6 +27,11 @@ Shader "ENV/Basic"
 			_RimThreshold ("Rim Threshold", Range(0, 1)) = 0.1
 			_RimIntensity ("Rim Intensity", float) = 1.0
 			[VerticalBoxEnd]_RimLightEnd("",int) = 0
+		[VerticalBoxEnd]_LightingEnd("",int) = 0
+
+		[VerticalBoxStart(Emission)]_EmissionStart("",int) = 0
+		[NoScaleOffset]_EmissionMap ("Emission Map", 2D) = "black" {}
+		_EmissionIntensity ("Emission Intensity", float) = 1.0
 		[VerticalBoxEnd]_LightingEnd("",int) = 0
 	}
 	SubShader 
@@ -48,9 +53,9 @@ Shader "ENV/Basic"
 			
 			float4 _Color;
 			float _Metallic;
-            sampler2D _AlbedoMap, _BumpMap, _ARMMap;
+            sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
             float4 _AlbedoMap_ST;
-            float _BumpIntensity, _AmbientIntensity, _Roughness, _RimAmount, _RimThreshold, _RimIntensity;
+            float _BumpIntensity, _AmbientIntensity, _Roughness, _RimAmount, _RimThreshold, _RimIntensity, _EmissionIntensity;
 
             struct appdata
             {
@@ -104,6 +109,7 @@ Shader "ENV/Basic"
 				p2s ps;
                 half4 albedoMap = tex2D(_AlbedoMap, vs.uv);
                 half4 aRMMap = tex2D(_ARMMap, vs.uv);
+				half4 emissionMap = tex2D(_EmissionMap, vs.uv);
                 half3 albedo = albedoMap.rgb * _Color.rgb * pow(aRMMap.r, _AmbientIntensity);
                 half3 specularMap;
 
@@ -126,14 +132,15 @@ Shader "ENV/Basic"
 				half specularMonochrome; 
 				half3 diffuseColor = DiffuseAndSpecularFromMetallic(albedo, aRMMap.b * (1 - _Metallic), specularMap, specularMonochrome );
 				ps.albedo = half4( diffuseColor, 1.0 );
-				ps.albedo += ps.albedo * rim * max(_RimIntensity, 0.0) * (1.0 - aRMMap.b);
+				ps.albedo += ps.albedo * rim * max(_RimIntensity, 0.0);// * (1.0 - aRMMap.b);
 				ps.albedo = saturate(ps.albedo);
-				ps.specular = aRMMap.g * (1.0 - _Roughness) * half4(albedo, 1.0 );
+				ps.specular = aRMMap.g * (1.0 - min(_Roughness, 1.0)) * half4(albedo, 1.0 );
 				ps.normal = half4( worldNormal * 0.5 + 0.5, 1.0 );
-				ps.emission = half4(0,0,0,1);
-				#ifndef UNITY_HDR_ON
-					ps.emission.rgb = exp2(-ps.emission.rgb);
-				#endif
+				//ps.emission = half4(_EmissionIntensity, 0.0, 0.0, 1.0);
+				ps.emission = saturate(emissionMap * _EmissionIntensity);
+				//#ifndef UNITY_HDR_ON
+				//	ps.emission.rgb = exp2(-ps.emission.rgb);
+				//#endif
 				return ps;
 			}
 			ENDCG
