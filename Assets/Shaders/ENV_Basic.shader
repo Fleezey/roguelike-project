@@ -128,7 +128,7 @@ Shader "ENV/Basic"
 				ps.albedo = half4( diffuseColor, 1.0 );
 				ps.albedo += ps.albedo * rim * max(_RimIntensity, 0.0) * (1.0 - aRMMap.b);
 				ps.albedo = saturate(ps.albedo);
-				ps.specular = lerp(aRMMap.g * (1.0 - _Roughness), 0.99, aRMMap.b) * half4(albedo, 1.0 );
+				ps.specular = aRMMap.g * (1.0 - _Roughness) * half4(albedo, 1.0 );
 				ps.normal = half4( worldNormal * 0.5 + 0.5, 1.0 );
 				ps.emission = half4(0,0,0,1);
 				#ifndef UNITY_HDR_ON
