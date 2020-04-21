@@ -42,11 +42,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ARMMap:
-        m_Texture: {fileID: 2800000, guid: 0834a43f84a8ddd418d2f613efd2df96, type: 3}
+        m_Texture: {fileID: 2800000, guid: d5f0f56dbc80a99409f51da034f916ad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoMap:
-        m_Texture: {fileID: 2800000, guid: f5afdc22c7703f64eae2f6271986f0aa, type: 3}
+        m_Texture: {fileID: 2800000, guid: cf5b51372afd914438de756d15c82935, type: 3}
         m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -66,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 6ac80d5246a712347ba2840ec3e6ceb0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 41ab90eb17e7df548bc390f7967b514e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
@@ -237,11 +237,11 @@ Material:
     - _ReceivesSSR: 1
     - _RefractionModel: 0
     - _RimAmount: 0.2
-    - _RimIntensity: 10
+    - _RimIntensity: 0
     - _RimLightEnd: 0
     - _RimLightStart: 0
     - _RimThreshold: 0.1
-    - _Roughness: 0.5
+    - _Roughness: 0.458
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1
