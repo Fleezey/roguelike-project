@@ -8,7 +8,7 @@ public class VerticalBoxStart : MaterialPropertyDrawer
 {
     protected Color Col = Color.white;
     protected String Label = "";
-    protected float Dimmer = 1.15f;
+    protected float Dimmer = 1.2f;
 
     #region
     public VerticalBoxStart(){
