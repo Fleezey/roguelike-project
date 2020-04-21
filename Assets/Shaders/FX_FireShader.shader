@@ -40,7 +40,7 @@
         Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
-        LOD 100
+        LOD 200
         //Cull Off
 
         Pass {
@@ -105,8 +105,12 @@
                     o.mainUv = mUv(o.mainUv, randomV, moduloUv, direction);
                     o.subUv = sUv(o.subUv, randomV, moduloUv, direction);
                     o.uv = moduloUv;
-                    o.vertex.xyz += v.normal * tex2Dlod(_FireMask, float4(o.mainUv + fixed2(0.0, randomV),0,0)).r * _FireDisplacement;
+
+                    //o.vertex.xyz += v.normal * tex2Dlod(_FireMask, float4(o.mainUv + fixed2(0.0, randomV),0,0)).r * _FireDisplacement;
                     o.vertex.xyz += v.normal * (sin(_Time.y * _FireMoveSpeed)%PI2 - 1.0f) * _FireMoveIntensity * pow(o.uv.y, _FireMovePow);
+                    //float pulseMask = length(o.uv.y%1.0f - (_Time.y)%1.0f) * length((o.uv.y - 1.0f)%1.0f - (_Time.y)%1.0f);
+                    //pulseMask = saturate(pow(lerp(0.0f, 1.0f, pulseMask), 1.0f));
+                    //o.vertex.y += (1.0f - pulseMask) * 5.0f;
                     return o;
                 }
 
@@ -123,12 +127,18 @@
                     
                     float maskMultiplier = pow(saturate(sqrt(pow((_FireXPosition - x), 2.0f) + pow((_FireYPosition - y), 2.0f))), _FireMaskPow);
 
+                    float pulse = (_Time.y * 5.5f)%1.0f;
+                    float pulseMask = abs(-y + pulse) * abs(-y + 2.0f + pulse) * abs(-y - 2.0f + pulse);
+                    pulseMask = saturate(lerp(0.15f, 1.0f, pow(pulseMask, 8.0f)));
+
                     y += y * multMask.x * maskMultiplier;
                     x += x * multSubMask.x * maskMultiplier;
                     
                     fixed4 col = fixed4(0.0f, 0.0f, 0.0f, 0.0f);
                     col += saturate(1.0f - sqrt(pow((_FireXPosition - x), 2.0f) + pow((_FireYPosition - y), 2.0f)));
                     col *= _Color;
+                    col.rgb *= 5.0f;
+                    //col.rgb *= pulseMask;
                     return col;
                 }
             ENDCG
