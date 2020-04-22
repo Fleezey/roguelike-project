@@ -201,7 +201,7 @@ Material:
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _Emi: 0.716
-    - _EmissionIntensity: 1
+    - _EmissionIntensity: 2
     - _EmissionStart: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
