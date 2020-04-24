@@ -35,7 +35,7 @@ namespace FGSX.Abilities
                     AbilityReady();
                 }
 
-                if (Input.GetButtonDown(m_AbilityButtonName))
+                if ((m_Ability.m_IsContinuous && Input.GetButton(m_AbilityButtonName)) || Input.GetButtonDown(m_AbilityButtonName))
                 {
                     OnAbilityTriggered();
                 }
