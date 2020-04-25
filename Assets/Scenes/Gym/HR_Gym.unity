@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 79843371}
   - component: {fileID: 79843370}
   - component: {fileID: 79843369}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 118939713}
   - component: {fileID: 118939712}
   - component: {fileID: 118939711}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HR_Metal_Trim_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 129933547}
   - component: {fileID: 129933546}
   - component: {fileID: 129933545}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1220,7 @@ GameObject:
   - component: {fileID: 264449240}
   - component: {fileID: 264449239}
   - component: {fileID: 264449238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1314,7 +1314,7 @@ GameObject:
   - component: {fileID: 311461792}
   - component: {fileID: 311461791}
   - component: {fileID: 311461790}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1499,7 +1499,7 @@ GameObject:
   - component: {fileID: 350116963}
   - component: {fileID: 350116962}
   - component: {fileID: 350116961}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 443910971}
   - component: {fileID: 443910970}
   - component: {fileID: 443910969}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1928,7 +1928,7 @@ GameObject:
   - component: {fileID: 489156284}
   - component: {fileID: 489156283}
   - component: {fileID: 489156282}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2022,7 +2022,7 @@ GameObject:
   - component: {fileID: 500964083}
   - component: {fileID: 500964082}
   - component: {fileID: 500964081}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2196,7 +2196,7 @@ GameObject:
   - component: {fileID: 564493877}
   - component: {fileID: 564493876}
   - component: {fileID: 564493875}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2476,7 +2476,7 @@ GameObject:
   - component: {fileID: 568185933}
   - component: {fileID: 568185932}
   - component: {fileID: 568185931}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2941,7 +2941,7 @@ GameObject:
   - component: {fileID: 770783149}
   - component: {fileID: 770783148}
   - component: {fileID: 770783147}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3134,7 +3134,7 @@ GameObject:
   - component: {fileID: 785954876}
   - component: {fileID: 785954875}
   - component: {fileID: 785954874}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3787,7 +3787,7 @@ GameObject:
   - component: {fileID: 924244683}
   - component: {fileID: 924244682}
   - component: {fileID: 924244681}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4584,7 +4584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2a37c4ec530ab44adb0d58d8fd4b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 10
   m_Crosshair: {fileID: 778014559}
 --- !u!114 &1115341224
 MonoBehaviour:
@@ -4598,22 +4597,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb32f5e47bfac84c8c5a2a371c37e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1115341225
-Rigidbody:
+  m_MoveSpeed: 8.8
+  m_GravityScale: 1
+--- !u!143 &1115341225
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115341221}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1115341226
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4825,7 +4828,7 @@ GameObject:
   - component: {fileID: 1199117392}
   - component: {fileID: 1199117391}
   - component: {fileID: 1199117390}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5104,7 +5107,7 @@ GameObject:
   - component: {fileID: 1272298242}
   - component: {fileID: 1272298241}
   - component: {fileID: 1272298240}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5290,7 +5293,7 @@ GameObject:
   - component: {fileID: 1365247124}
   - component: {fileID: 1365247123}
   - component: {fileID: 1365247122}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5383,7 +5386,7 @@ GameObject:
   - component: {fileID: 1378882952}
   - component: {fileID: 1378882951}
   - component: {fileID: 1378882950}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5477,7 +5480,7 @@ GameObject:
   - component: {fileID: 1396858754}
   - component: {fileID: 1396858753}
   - component: {fileID: 1396858752}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5664,7 +5667,7 @@ GameObject:
   - component: {fileID: 1606369755}
   - component: {fileID: 1606369754}
   - component: {fileID: 1606369753}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5758,7 +5761,7 @@ GameObject:
   - component: {fileID: 1621011403}
   - component: {fileID: 1621011402}
   - component: {fileID: 1621011401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HR_Metal_Trim_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6130,7 +6133,7 @@ GameObject:
   - component: {fileID: 1803000554}
   - component: {fileID: 1803000553}
   - component: {fileID: 1803000552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hr_Ground_Tiles01 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

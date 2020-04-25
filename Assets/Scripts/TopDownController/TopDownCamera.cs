@@ -45,7 +45,7 @@ namespace FGSX.TopDownController
             SetTarget(m_Target.gameObject);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             UpdateCameraPosition();
         }

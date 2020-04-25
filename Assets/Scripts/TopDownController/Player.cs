@@ -6,8 +6,6 @@ namespace FGSX.TopDownController
     [RequireComponent(typeof (PlayerController))]
     public class Player : LivingEntity
     {
-        public float m_MoveSpeed = 5f;
-
         public Crosshair m_Crosshair;
 
         private Camera m_ViewCamera;
@@ -32,8 +30,7 @@ namespace FGSX.TopDownController
         private void HandleMovementInput()
         {
             Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            Vector3 moveVelocity = moveInput.normalized * m_MoveSpeed;
-            m_Controller.Move(moveVelocity);
+            m_Controller.Move(moveInput);
         }
 
         private void HandleRotationInput() {
