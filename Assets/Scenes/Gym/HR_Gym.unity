@@ -4587,7 +4587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Crosshair: {fileID: 778014559}
   m_CrosshairOffsetDistance: 8
-  m_IsUsingGamepad: 1
+  m_IsUsingGamepad: 0
 --- !u!114 &1115341224
 MonoBehaviour:
   m_ObjectHideFlags: 0
