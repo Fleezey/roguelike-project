@@ -3055,6 +3055,7 @@ MonoBehaviour:
   m_TargetMask:
     serializedVersion: 2
     m_Bits: 256
+  m_MoveTime: 0.25
   m_Dot: {fileID: 519009769}
   m_DotHighlightColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &778014560
@@ -4585,6 +4586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Crosshair: {fileID: 778014559}
+  m_CrosshairOffsetDistance: 8
+  m_IsUsingGamepad: 1
 --- !u!114 &1115341224
 MonoBehaviour:
   m_ObjectHideFlags: 0

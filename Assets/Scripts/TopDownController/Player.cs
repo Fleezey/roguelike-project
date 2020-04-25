@@ -7,15 +7,19 @@ namespace FGSX.TopDownController
     public class Player : LivingEntity
     {
         public Crosshair m_Crosshair;
+        [Tooltip("Distance from the origin that the crosshair is forced to have when using a gamepad")]
+        public float m_CrosshairOffsetDistance = 8f;
+        private Vector3 m_LastCrosshairPosition;
+        private Vector3 m_LastAimInput;
+
+        public bool m_IsUsingGamepad = false;
 
         private Camera m_ViewCamera;
         private PlayerController m_Controller;
 
 
-        protected override void Start()
+        private void Awake()
         {
-            base.Start();
-
             m_Controller = GetComponent<PlayerController>();
             m_ViewCamera = Camera.main;
         }
@@ -34,24 +38,45 @@ namespace FGSX.TopDownController
         }
 
         private void HandleRotationInput() {
-            Ray ray = m_ViewCamera.ScreenPointToRay(Input.mousePosition);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.up * transform.position.y);
+
             float rayDistance;
 
-            if (groundPlane.Raycast(ray, out rayDistance)) {
-                Vector3 point = ray.GetPoint(rayDistance);
-                m_Controller.LookAt(point);
-                m_Crosshair.transform.position = point;
-                m_Crosshair.DetectTargets(ray);
+            Plane groundPlane = new Plane(transform.up, transform.position);
+            Ray ray = GetRotationRay();
+            if (groundPlane.Raycast(ray, out rayDistance))
+            {
+                float offsetDistance = m_IsUsingGamepad ? m_CrosshairOffsetDistance : 0f;
+                Vector3 lookAtPosition = LookAt(ray, rayDistance, offsetDistance);
+                m_LastCrosshairPosition = lookAtPosition;
+            }
+        }
 
-                if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 3.5) {
-                    // Aim it
+        private Ray GetRotationRay()
+        {
+            if (m_IsUsingGamepad)
+            {
+                Vector3 aimInput = new Vector3(Input.GetAxisRaw("Aim Horizontal"), 0, Input.GetAxisRaw("Aim Vertical"));
+                m_LastAimInput = aimInput;
+                
+                if (aimInput.magnitude == 0f) {
+                    aimInput = m_LastCrosshairPosition;
                 }
 
-#if DEBUG_CAMERA
-                Debug.DrawLine(ray.origin, point, Color.red);
-#endif
+                return new Ray(
+                    transform.position + aimInput.normalized + transform.up,
+                    (transform.up * -1)
+                );
             }
+
+            return m_ViewCamera.ScreenPointToRay(Input.mousePosition);
+        }
+
+        private Vector3 LookAt(Ray ray, float rayDistance, float forcedOffsetDistanceFromOrigin)
+        {
+            Vector3 point = ray.GetPoint(rayDistance);
+            Vector3 updatedCrosshairPosition = m_Crosshair.MoveTo(transform.position, point, forcedOffsetDistanceFromOrigin);
+            m_Controller.LookAt(updatedCrosshairPosition);
+            return updatedCrosshairPosition;
         }
     }
 }
