@@ -1,6 +1,6 @@
 ﻿// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "Hidden/CustomDeferredReflections" {
+Shader "Hidden/Internal-DeferredReflectionsCustom" {
 Properties {
     _SrcBlend ("", Float) = 1
     _DstBlend ("", Float) = 1
@@ -81,7 +81,7 @@ half4 frag (unity_v2f_deferred i) : SV_Target
     light.dir = half3(0, 1, 0);
 
     UnityIndirect ind;
-    ind.diffuse = 0;
+    ind.diffuse = gbuffer3;
     ind.specular = env0;
 
     half3 rgb = UNITY_BRDF_PBS (0, data.specularColor, oneMinusReflectivity, data.smoothness, data.normalWorld, -eyeVec, light, ind).rgb;
@@ -92,8 +92,7 @@ half4 frag (unity_v2f_deferred i) : SV_Target
     half3 distance = distanceFromAABB(worldPos, unity_SpecCube0_BoxMin.xyz, unity_SpecCube0_BoxMax.xyz);
     half falloff = saturate(1.0 - length(distance)/blendDistance);
 
-    //return half4(gbuffer3, falloff);
-    return 0;
+    return half4(rgb, falloff);
 }
 
 ENDCG

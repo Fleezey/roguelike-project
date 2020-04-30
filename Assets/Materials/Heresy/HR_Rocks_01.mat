@@ -201,6 +201,7 @@ Material:
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _Emi: 0.716
+    - _EmissionColorGain: 1
     - _EmissionIntensity: 0
     - _EmissionStart: 0
     - _EmissiveColorMode: 1
@@ -248,7 +249,7 @@ Material:
     - _RimLightEnd: 0
     - _RimLightStart: 0
     - _RimThreshold: 0.495
-    - _Roughness: 14.11
+    - _Roughness: 0.1
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1

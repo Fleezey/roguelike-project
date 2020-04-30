@@ -1,4 +1,6 @@
-﻿Shader "Hidden/CustomDeferredShading" {
+﻿// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+
+Shader "Hidden/Internal-DeferredShadingCustom" {
 Properties {
     _LightTexture0 ("", any) = "" {}
     _LightTextureB0 ("", 2D) = "" {}
@@ -56,7 +58,6 @@ half4 CalculateLight (unity_v2f_deferred i)
 
     float3 eyeVec = normalize(wpos-_WorldSpaceCameraPos);
     half oneMinusReflectivity = 1 - SpecularStrength(data.specularColor.rgb);
-    //
 
     UnityIndirect ind;
     UNITY_INITIALIZE_OUTPUT(UnityIndirect, ind);
@@ -65,7 +66,8 @@ half4 CalculateLight (unity_v2f_deferred i)
 
     half4 res = UNITY_BRDF_PBS (data.diffuseColor, data.specularColor, oneMinusReflectivity, data.smoothness, data.normalWorld, -eyeVec, light, ind);
 
-    return gbuffer3;
+    return res;
+    //return gbuffer3;
 }
 
 #ifdef UNITY_HDR_ON

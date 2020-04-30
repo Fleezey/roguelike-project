@@ -33,11 +33,24 @@ Shader "ENV/Basic"
 		[NoScaleOffset]_EmissionMap ("Emission Map", 2D) = "black" {}
 		_EmissionColorGain ("Emission Color Gain", float) = 1.0
 		_EmissionIntensity ("Emission Intensity", float) = 1.0
-		[HDR]_EmissionColor ("Emission Color", Color) = (1,1,1,1)
 		[VerticalBoxEnd]_LightingEnd("",int) = 0
 	}
+	
 	SubShader 
 	{
+		CGINCLUDE
+		#include "UnityCG.cginc"
+		#include "UnityPBSLighting.cginc"
+		#include "UnityDeferredLibrary.cginc"
+
+		float4 _Color;
+		float _Metallic;
+		sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
+		float4 _AlbedoMap_ST;
+		float _BumpIntensity, _AmbientIntensity, _Roughness, _RimAmount, _RimThreshold, _RimIntensity;
+		float _EmissionColorGain, _EmissionIntensity;
+		ENDCG
+
 		Pass 
 		{
 			Tags {"LightMode"="Deferred"}
@@ -48,18 +61,6 @@ Shader "ENV/Basic"
 			#pragma exclude_renderers nomrt
 			#pragma multi_compile ___ UNITY_HDR_ON
 			#pragma target 3.0
-			
-			#include "UnityPBSLighting.cginc"
-			#include "Lighting.cginc"
-			#include "AutoLight.cginc"
-			#include "UnityDeferredLibrary.cginc"
-			
-			float4 _Color;
-			float _Metallic;
-            sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
-            float4 _AlbedoMap_ST;
-            float _BumpIntensity, _AmbientIntensity, _Roughness, _RimAmount, _RimThreshold, _RimIntensity, _EmissionColorGain, _EmissionIntensity;
-			half4 _EmissionColor;
 
             struct appdata
             {

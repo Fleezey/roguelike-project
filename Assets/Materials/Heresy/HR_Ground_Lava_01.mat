@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: HR_Ground_Lava_01
   m_Shader: {fileID: 4800000, guid: ec815fc31eebb9d40b30766a2204549b, type: 3}
-  m_ShaderKeywords: _EMISSION _NORMALMAP _NORMALMAP_TANGENT_SPACE
+  m_ShaderKeywords: USE_ALPHA _EMISSION _NORMALMAP _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -47,7 +47,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _AlbedoMap:
         m_Texture: {fileID: 2800000, guid: 8cc7d2a98a177ba4c80dfefbc4ab5d8c, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
@@ -94,7 +94,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: da4a6d14ab649ec458cb569293d8d981, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9858acfd333c7824d9b3475ca293ffaa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
@@ -118,7 +118,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9858acfd333c7824d9b3475ca293ffaa, type: 3}
         m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -229,7 +229,8 @@ Material:
     - _Emi: 0.716
     - _EmissionColorBoost: 1
     - _EmissionColorGain: 1
-    - _EmissionIntensity: 58.09
+    - _EmissionDistance: 11
+    - _EmissionIntensity: 5
     - _EmissionStart: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
@@ -321,6 +322,7 @@ Material:
     - _UVDetail: 0
     - _UVEmissive: 0
     - _UVSec: 0
+    - _UseAlpha: 1
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 3
@@ -336,7 +338,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
-    - _EmissionColor: {r: 1, g: 0.05951124, b: 0.027320892, a: 1}
+    - _EmissionColor: {r: 0.027450979, g: 0.08865452, b: 1, a: 1}
     - _EmissionMap: {r: 1, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}

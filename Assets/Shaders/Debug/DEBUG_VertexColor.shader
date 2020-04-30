@@ -1,4 +1,4 @@
-﻿Shader "Debug/VertexColor"
+﻿Shader "DEBUG/VertexColor"
 {
     Properties
     {
