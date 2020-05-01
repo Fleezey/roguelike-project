@@ -203,7 +203,7 @@ Material:
     - _Emi: 0.716
     - _EmissionColorBoost: 1
     - _EmissionColorGain: 1
-    - _EmissionIntensity: 0
+    - _EmissionIntensity: 1
     - _EmissionStart: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
