@@ -31,6 +31,7 @@ Shader "ENV/Basic"
 
 		[VerticalBoxStart(Emission)]_EmissionStart("",int) = 0
 		[NoScaleOffset]_EmissionMap ("Emission Map", 2D) = "black" {}
+		_EmissionColor("Color", Color) = (1,1,1)
 		_EmissionColorGain ("Emission Color Gain", float) = 1.0
 		_EmissionIntensity ("Emission Intensity", float) = 1.0
 		[VerticalBoxEnd]_LightingEnd("",int) = 0
@@ -42,13 +43,9 @@ Shader "ENV/Basic"
 		#include "UnityCG.cginc"
 		#include "UnityPBSLighting.cginc"
 		#include "UnityDeferredLibrary.cginc"
+		#include "AutoLight.cginc"
+        #include "Lighting.cginc"
 
-		float4 _Color;
-		float _Metallic;
-		sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
-		float4 _AlbedoMap_ST;
-		float _BumpIntensity, _AmbientIntensity, _Roughness, _RimAmount, _RimThreshold, _RimIntensity;
-		float _EmissionColorGain, _EmissionIntensity;
 		ENDCG
 
 		Pass 
@@ -60,7 +57,15 @@ Shader "ENV/Basic"
 			#pragma fragment frag
 			#pragma exclude_renderers nomrt
 			#pragma multi_compile ___ UNITY_HDR_ON
+			#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
 			#pragma target 3.0
+
+			float4 _Color;
+			float _Metallic;
+			sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
+			float4 _AlbedoMap_ST;
+			float _BumpIntensity, _AmbientIntensity, _Roughness, _RimAmount, _RimThreshold, _RimIntensity;
+			float _EmissionColorGain, _EmissionIntensity;
 
             struct appdata
             {
@@ -79,6 +84,7 @@ Shader "ENV/Basic"
                 float3 bitangent : TEXCOORD3;
                 float3 normal : TEXCOORD4;
 				float3 viewDir : TEXCOORD5;
+				half2 lightmapuv : TEXCOORD6;
 			};
 			
 			struct p2s
@@ -106,6 +112,7 @@ Shader "ENV/Basic"
                 vs.tangent = wTangent;
                 vs.bitangent = wBitangent;
                 vs.normal = wNormal;
+				vs.lightmapuv = v.uv.xy * unity_LightmapST.xy + unity_LightmapST.zw;
 				return vs;
 			}
 			
@@ -139,6 +146,11 @@ Shader "ENV/Basic"
 				ps.albedo = half4( diffuseColor, 1.0 );
 				ps.albedo += ps.albedo * rim * max(_RimIntensity, 0.0) ;// * (1.0 - aRMMap.b);
 				ps.albedo = saturate(ps.albedo);
+
+				#ifndef LIGHTMAP_OFF
+				fixed3 lightMap = DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, vs.lightmapuv));
+				ps.albedo.rgb *= lightMap;
+				#endif
 				ps.specular = aRMMap.g * (1.0 - min(_Roughness, 1.0)) * half4(albedo, 1.0 );
 				ps.normal = half4( worldNormal * 0.5 + 0.5, 1.0 );
 				ps.emission = half4((emissionMap * _EmissionIntensity * _EmissionColorGain).rgb, _EmissionIntensity * _EmissionColorGain);
