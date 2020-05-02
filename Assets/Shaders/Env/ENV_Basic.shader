@@ -31,10 +31,12 @@ Shader "ENV/Basic"
 
 		[VerticalBoxStart(Emission)]_EmissionStart("",int) = 0
 		[NoScaleOffset]_EmissionMap ("Emission Map", 2D) = "black" {}
-		_EmissionColor("Color", Color) = (1,1,1)
+		[HDR]_EmissionColor("Color", Color) = (1,1,1)
 		_EmissionColorGain ("Emission Color Gain", float) = 1.0
 		_EmissionIntensity ("Emission Intensity", float) = 1.0
 		[VerticalBoxEnd]_LightingEnd("",int) = 0
+
+		_LightMapIntensity ("Lightmap Intensity", Range(0, 1)) = 0.5
 	}
 	
 	SubShader 
@@ -60,12 +62,12 @@ Shader "ENV/Basic"
 			#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
 			#pragma target 3.0
 
-			float4 _Color;
+			float4 _Color, _EmissionColor;
 			float _Metallic;
 			sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
 			float4 _AlbedoMap_ST;
 			float _BumpIntensity, _AmbientIntensity, _Roughness, _RimAmount, _RimThreshold, _RimIntensity;
-			float _EmissionColorGain, _EmissionIntensity;
+			float _EmissionColorGain, _EmissionIntensity, _LightMapIntensity;
 
             struct appdata
             {
@@ -141,7 +143,7 @@ Shader "ENV/Basic"
 				rimIntensity = smoothstep(1.0 - _RimAmount - 0.01, 1.0 - _RimAmount + 0.01, rimIntensity);
 				float4 rim = rimIntensity * _LightColor;
 
-				half specularMonochrome; 
+				half specularMonochrome;
 				half3 diffuseColor = DiffuseAndSpecularFromMetallic(albedo, aRMMap.b * (1 - _Metallic), specularMap, specularMonochrome );
 				ps.albedo = half4( diffuseColor, 1.0 );
 				ps.albedo += ps.albedo * rim * max(_RimIntensity, 0.0) ;// * (1.0 - aRMMap.b);
@@ -149,11 +151,12 @@ Shader "ENV/Basic"
 
 				#ifndef LIGHTMAP_OFF
 				fixed3 lightMap = DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, vs.lightmapuv));
-				ps.albedo.rgb *= lightMap;
+				ps.albedo.rgb = lerp(ps.albedo.rgb * lightMap, ps.albedo.rgb, 1.0 - _LightMapIntensity);
+				//ps.albedo = saturate(ps.albedo);
 				#endif
 				ps.specular = aRMMap.g * (1.0 - min(_Roughness, 1.0)) * half4(albedo, 1.0 );
 				ps.normal = half4( worldNormal * 0.5 + 0.5, 1.0 );
-				ps.emission = half4((emissionMap * _EmissionIntensity * _EmissionColorGain).rgb, _EmissionIntensity * _EmissionColorGain);
+				ps.emission = half4((emissionMap * _EmissionIntensity * _EmissionColorGain).rgb, _EmissionIntensity * _EmissionColorGain) * _EmissionColor;
 				#ifndef UNITY_HDR_ON
 					ps.emission.rgb = exp2(-ps.emission.rgb/max(1, _EmissionIntensity));
 				#endif

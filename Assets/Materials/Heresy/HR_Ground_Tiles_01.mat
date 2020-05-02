@@ -46,7 +46,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlbedoMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cf5b51372afd914438de756d15c82935, type: 3}
         m_Scale: {x: 3, y: 6}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -228,6 +228,7 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
+    - _LightMapIntensity: 1
     - _LightingEnd: 0
     - _LightingStart: 0
     - _LinkDetailsWithBase: 1
