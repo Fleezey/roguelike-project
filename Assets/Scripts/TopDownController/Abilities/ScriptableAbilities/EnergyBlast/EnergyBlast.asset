@@ -15,7 +15,6 @@ MonoBehaviour:
   m_Name: Energy Blast
   m_Cooldown: 0.15
   m_IsContinuous: 1
-  test: 1
   m_ProjectileForce: 1200
   m_Projectile: {fileID: 5073312510619839870, guid: 841fa703fd2e5394a92938a734156ee2,
     type: 3}

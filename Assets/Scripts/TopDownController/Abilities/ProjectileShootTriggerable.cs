@@ -12,7 +12,8 @@ namespace FGSX.Abilities
 
         public void Launch()
         {
-            Rigidbody clonedProjectile = Instantiate(m_Projectile, m_ProjectileSpawn.position, transform.rotation) as Rigidbody;
+            Rigidbody clonedProjectile = Instantiate(m_Projectile, m_ProjectileSpawn.position, m_ProjectileSpawn.rotation) as Rigidbody;
+
             clonedProjectile.AddForce(m_ProjectileSpawn.transform.forward * m_ProjectileForce);
         }
     }
