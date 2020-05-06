@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HR_Rocks_01
-  m_Shader: {fileID: 4800000, guid: ec815fc31eebb9d40b30766a2204549b, type: 3}
+  m_Name: HR_VP
+  m_Shader: {fileID: 4800000, guid: 85059811b511c9243a66c3be12dc2b71, type: 3}
   m_ShaderKeywords: _NORMALMAP _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -45,9 +45,25 @@ Material:
         m_Texture: {fileID: 2800000, guid: da4a6d14ab649ec458cb569293d8d981, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ARMMapB:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ARMMapG:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AlbedoMap:
         m_Texture: {fileID: 2800000, guid: 6930a19ff45f7524793258ebe43cd105, type: 3}
         m_Scale: {x: 3, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoMapB:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoMapG:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
@@ -69,6 +85,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: b9bf5512a9bdf584bb5de1d9b13dced7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BumpMapB:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMapG:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -82,6 +106,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMapB:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMapG:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -153,12 +185,19 @@ Material:
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ARMEnd: 0
+    - _ARMEndG: 0
     - _ARMStart: 0
+    - _ARMStartB: 0
+    - _ARMStartG: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlbedoEnd: 0
+    - _AlbedoEndB: 0
+    - _AlbedoEndG: 0
     - _AlbedoStart: 0
+    - _AlbedoStartB: 0
+    - _AlbedoStartG: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
@@ -167,9 +206,15 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _AmbientIntensity: 0.9
+    - _AmbientIntensityB: 1
+    - _AmbientIntensityG: 1
     - _Anisotropy: 0
     - _BlendMode: 0
+    - _BlueVerticesEnd: 0
+    - _BlueVerticesStart: 0
     - _BumpIntensity: 4
+    - _BumpIntensityB: 1
+    - _BumpIntensityG: 1
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -202,8 +247,17 @@ Material:
     - _DstBlend: 0
     - _Emi: 0.716
     - _EmissionColorGain: 1
+    - _EmissionColorGainB: 1
+    - _EmissionColorGainG: 1
+    - _EmissionEnd: 0
+    - _EmissionEndB: 0
+    - _EmissionEndG: 0
     - _EmissionIntensity: 0
+    - _EmissionIntensityB: 1
+    - _EmissionIntensityG: 1
     - _EmissionStart: 0
+    - _EmissionStartB: 0
+    - _EmissionStartG: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -231,28 +285,52 @@ Material:
     - _LightMapPower: 1
     - _LightMapShadowIntensity: 1
     - _LightingEnd: 0
+    - _LightingEndB: 0
+    - _LightingEndG: 0
     - _LightingStart: 0
+    - _LightingStartB: 0
+    - _LightingStartG: 0
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _Metallic: 0
+    - _MetallicB: 1
+    - _MetallicG: 1
     - _Metalness: 0
     - _NormalEnd: 0
+    - _NormalEndB: 0
+    - _NormalEndG: 0
     - _NormalMapSpace: 0
     - _NormalScale: 1
     - _NormalStart: 0
+    - _NormalStartB: 0
+    - _NormalStartG: 0
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
+    - _RedVerticesEnd: 0
+    - _RedVerticesStart: 0
     - _RefractionModel: 0
     - _RimAmount: 0.178
+    - _RimAmountB: 0.716
+    - _RimAmountG: 0.716
     - _RimIntensity: 2
+    - _RimIntensityB: 1
+    - _RimIntensityG: 1
     - _RimLightEnd: 0
+    - _RimLightEndB: 0
+    - _RimLightEndG: 0
     - _RimLightStart: 0
+    - _RimLightStartB: 0
+    - _RimLightStartG: 0
     - _RimThreshold: 0.495
+    - _RimThresholdB: 0.1
+    - _RimThresholdG: 0.1
     - _Roughness: 0.1
+    - _RoughnessB: 0.5
+    - _RoughnessG: 0.5
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1
@@ -291,22 +369,36 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
+    - _VerticesEndB: 0
+    - _VerticesEndG: 0
+    - _VerticesEndR: 0
+    - _VerticesStartB: 0
+    - _VerticesStartG: 0
+    - _VerticesStartR: 0
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - _uvMetric: 10
+    - _uvMetricB: 10
+    - _uvMetricG: 10
     - _worldPositionUvs: 0
+    - _worldPositionUvsB: 0
+    - _worldPositionUvsG: 0
     m_Colors:
     - _Albedo: {r: 1, g: 1, b: 1, a: 1}
     - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorB: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorG: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColorB: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColorG: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}

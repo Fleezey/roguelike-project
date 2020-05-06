@@ -31,6 +31,17 @@ public class VerticalBoxStart : MaterialPropertyDrawer
         Label = label;
     }
 
+    public VerticalBoxStart(float r, float g, float b, float level) {
+        float dimmerValue = Mathf.Pow(Dimmer, level - 1.0f);
+        Col = new Color(r / dimmerValue, g / dimmerValue, b / dimmerValue, 1.0f);
+    }
+
+    public VerticalBoxStart(string label, float r, float g, float b, float level) {
+        float dimmerValue = Mathf.Pow(Dimmer, level - 1.0f);
+        Col = new Color(r / dimmerValue, g / dimmerValue, b / dimmerValue, 1.0f);
+        Label = label;
+    }
+
     public VerticalBoxStart(string label, float r, float g, float b) {
         Label = label;
         Col = new Color(r, g, b, 1.0f);
