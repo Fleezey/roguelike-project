@@ -230,6 +230,7 @@ Material:
     - _EmissionColorBoost: 1
     - _EmissionColorGain: 1
     - _EmissionDistance: 11
+    - _EmissionEnd: 0
     - _EmissionIntensity: 1
     - _EmissionStart: 0
     - _EmissiveColorMode: 1
@@ -258,6 +259,8 @@ Material:
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LightDistance: 1
+    - _LightMapIntensity: 1
+    - _LightMapShadowIntensity: 1
     - _LightingEnd: 0
     - _LightingStart: 0
     - _LinkDetailsWithBase: 1
@@ -331,6 +334,8 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
+    - _uvMetric: 10
+    - _worldPositionUvs: 0
     m_Colors:
     - _Albedo: {r: 1, g: 1, b: 1, a: 1}
     - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
@@ -339,7 +344,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
-    - _EmissionColor: {r: 32, g: 32, b: 32, a: 1}
+    - _EmissionColor: {r: 23.968628, g: 32, b: 32, a: 1}
     - _EmissionMap: {r: 1, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}

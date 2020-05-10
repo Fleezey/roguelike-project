@@ -607,7 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloomShader: {fileID: 4800000, guid: 926e8db920ab84661b115e2bdbc8199b, type: 3}
-  intensity: 0.91
+  intensity: 0.03
   iterations: 4
   threshold: 1
   softThreshold: 0.5
