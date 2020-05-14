@@ -17,10 +17,13 @@ namespace FGSX.TopDownController
         private Camera m_ViewCamera;
         private PlayerController m_Controller;
 
+        private Animator m_Animator;
+
 
         private void Awake()
         {
             m_Controller = GetComponent<PlayerController>();
+            m_Animator = GetComponent<Animator>();
             m_ViewCamera = Camera.main;
         }
 
@@ -28,6 +31,18 @@ namespace FGSX.TopDownController
         {
             HandleMovementInput();
             HandleRotationInput();
+            HandleRollInput();
+        }
+
+
+        public void HandleRollInput()
+        {
+            if (Input.GetButtonDown("Roll"))
+            {
+                m_Animator.SetTrigger("Roll");
+                Vector3 rollDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+                m_Controller.StartRoll(rollDirection);
+            }
         }
 
 
