@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace FGSX
 {
+    [RequireComponent(typeof (Animator))]
     public class PlayerAnimations : MonoBehaviour
     {
         public Action m_OnRollEnd;

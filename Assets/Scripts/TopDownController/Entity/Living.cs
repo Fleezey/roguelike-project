@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 
 
-namespace FGSX.TopDownController
+namespace FGSX.TopDownController.Entity
 {
-    public class LivingEntity : MonoBehaviour
+    public abstract class Living : Entity
     {
         public float Health { get; protected set; }
         public float MaxHealth { get; protected set; }
@@ -14,9 +14,10 @@ namespace FGSX.TopDownController
         protected bool m_IsDead;
 
 
-        protected virtual void Start()
+        protected override void Start()
         {
-            Health = MaxHealth;
+            base.Start();
+            Health = MaxHealth;     
         }
 
 

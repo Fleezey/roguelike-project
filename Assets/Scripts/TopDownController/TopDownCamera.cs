@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FGSX.TopDownController.Entity;
+using UnityEngine;
 
 
 namespace FGSX.TopDownController
@@ -58,7 +59,7 @@ namespace FGSX.TopDownController
             Player player = m_Target.GetComponent<Player>();
             if (player != null)
             {
-                m_PlayerCrosshair = player.m_Crosshair;
+                m_PlayerCrosshair = player.Crosshair;
             }
         }
 
