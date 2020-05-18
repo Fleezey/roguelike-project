@@ -23,9 +23,9 @@
 
 		[VerticalBoxStart(Lighting)]_LightingStart ("",int) = 0
 			[VerticalBoxStart(Rim Light, 2)]_RimLightStart ("",int) = 0
-				_RimAmount ("Rim Amount", Range(0, 1)) = 0.716
-				_RimThreshold ("Rim Threshold", Range(0, 1)) = 0.1
-				_RimIntensity ("Rim Intensity", float) = 1.0
+				_RimAmount ("Rim Amount", Range(0, 1)) = 0.2
+				_RimThreshold ("Rim Threshold", Range(0, 1)) = 0.5
+				_RimIntensity ("Rim Intensity", Range(0, 1)) = 0.25
 			[VerticalBoxEnd]_RimLightEnd ("",int) = 0
 
 			[VerticalBoxStart(Emission, 2)]_EmissionStart ("",int) = 0
@@ -55,16 +55,7 @@
 			Tags {"LightMode"="Deferred"}
          
 			CGPROGRAM
-			
-			sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
-			float4 _Color, _EmissionColor;
-			float _Metallic, _Roughness;
-			float4 _AlbedoMap_ST;
-			float _BumpIntensity, _AmbientIntensity;
-			float _RimAmount, _RimThreshold, _RimIntensity;
-			float _EmissionColorGain, _EmissionIntensity;
-			float _LightMapIntensity, _LightMapShadowIntensity;
-			float _worldPositionUvs, _uvMetric;
+
 
 			#include "DefaultEnv.cginc"
 

@@ -25,9 +25,9 @@ Shader "ENV/Basic"
 
 		[VerticalBoxStart(Lighting)]_LightingStart ("",int) = 0
 			[VerticalBoxStart(Rim Light, 2)]_RimLightStart ("",int) = 0
-				_RimAmount ("Rim Amount", Range(0, 1)) = 0.716
-				_RimThreshold ("Rim Threshold", Range(0, 1)) = 0.1
-				_RimIntensity ("Rim Intensity", float) = 1.0
+				_RimAmount ("Rim Amount", Range(0, 1)) = 0.2
+				_RimThreshold ("Rim Threshold", Range(0, 1)) = 0.5
+				_RimIntensity ("Rim Intensity", Range(0, 1)) = 0.25
 			[VerticalBoxEnd]_RimLightEnd ("",int) = 0
 
 			[VerticalBoxStart(Emission, 2)]_EmissionStart ("",int) = 0
@@ -35,8 +35,8 @@ Shader "ENV/Basic"
 				[HDR]_EmissionColor ("Color", Color) = (1,1,1)
 				_EmissionColorGain ("Emission Color Gain", float) = 1.0
 				_EmissionIntensity ("Emission Intensity", float) = 1.0
-				_LightMapIntensity ("Lightmap Intensity", Range(0, 10)) = 1.0
-				_LightMapShadowIntensity ("Lightmap Shadow Intensity", Range(0, 1)) = 1.0
+				_LightMapIntensity ("Lightmap Power", Range(0, 10)) = 1.0
+				_LightMapShadowIntensity ("Lightmap Intensity", Range(0, 1)) = 1.0
 			[VerticalBoxEnd]_EmissionEnd ("",int) = 0
 		[VerticalBoxEnd]_LightingEnd ("",int) = 0
 	}
@@ -49,17 +49,6 @@ Shader "ENV/Basic"
 		#include "UnityDeferredLibrary.cginc"
 		#include "AutoLight.cginc"
         #include "Lighting.cginc"
-
-		sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
-		float4 _Color, _EmissionColor;
-		float _Metallic, _Roughness;
-		float4 _AlbedoMap_ST;
-		float _BumpIntensity, _AmbientIntensity;
-		float _RimAmount, _RimThreshold, _RimIntensity;
-		float _EmissionColorGain, _EmissionIntensity;
-		float _LightMapIntensity, _LightMapShadowIntensity;
-		float _worldPositionUvs, _uvMetric;
-
 		ENDCG
 
 		Pass 
@@ -69,12 +58,10 @@ Shader "ENV/Basic"
 			CGPROGRAM
 			#pragma target 3.0
 			#pragma exclude_renderers nomrt
-
 			#pragma multi_compile_prepassfinal
 
 			#pragma vertex vertBasic
 			#pragma fragment fragBasic
-			#define DEFERRED_PASS
 
 			#include "DefaultEnv.cginc"
 
