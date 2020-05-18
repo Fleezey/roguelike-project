@@ -18,9 +18,9 @@ Shader "ENV/Basic"
 		
 		[VerticalBoxStart(Ambient Roughness Metallic)]_ARMStart ("",int) = 0
 			[NoScaleOffset]_ARMMap ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
-			_AmbientIntensity ("Ambient Occlusion Intensity", Range(0.0, 10.0)) = 1.0
+			_AmbientIntensity ("Ambient Occlusion Intensity", Range(0.0, 100.0)) = 1.0
 			_Metallic ("Metallic", Range(0, 1)) = 1
-			_Roughness ("Roughness", float) = 0.5
+			_Roughness ("Roughness", Float) = 0.5
 		[VerticalBoxEnd]_ARMEnd ("",int) = 0
 
 		[VerticalBoxStart(Lighting)]_LightingStart ("",int) = 0
@@ -35,10 +35,9 @@ Shader "ENV/Basic"
 				[HDR]_EmissionColor ("Color", Color) = (1,1,1)
 				_EmissionColorGain ("Emission Color Gain", float) = 1.0
 				_EmissionIntensity ("Emission Intensity", float) = 1.0
+				_LightMapIntensity ("Lightmap Intensity", Range(0, 10)) = 1.0
+				_LightMapShadowIntensity ("Lightmap Shadow Intensity", Range(0, 1)) = 1.0
 			[VerticalBoxEnd]_EmissionEnd ("",int) = 0
-
-			_LightMapIntensity ("Lightmap Intensity", Range(0, 10)) = 1.0
-			_LightMapShadowIntensity ("Lightmap Shadow Intensity", Range(0, 1)) = 1.0
 		[VerticalBoxEnd]_LightingEnd ("",int) = 0
 	}
 	
@@ -68,16 +67,19 @@ Shader "ENV/Basic"
 			Tags {"LightMode"="Deferred"}
          
 			CGPROGRAM
-			#include "DefaultEnv.cginc"
+			#pragma target 3.0
+			#pragma exclude_renderers nomrt
+
+			#pragma multi_compile_prepassfinal
+
 			#pragma vertex vertBasic
 			#pragma fragment fragBasic
-			#pragma exclude_renderers nomrt
-			#pragma multi_compile ___ UNITY_HDR_ON
-			#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
-			#pragma target 3.0
+			#define DEFERRED_PASS
+
+			#include "DefaultEnv.cginc"
 
 			ENDCG
 		}
 	}
-	FallBack "CustomDeferredShading"
+	FallBack "Standard"
 }

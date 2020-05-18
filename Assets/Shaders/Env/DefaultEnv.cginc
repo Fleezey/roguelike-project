@@ -1,4 +1,13 @@
-﻿struct appdataBasic
+﻿#if !defined(DEFAULT_ENV_INCLUDED)
+#define DEFAULT_ENV_INCLUDED
+
+#include "UnityPBSLighting.cginc"
+#include "AutoLight.cginc"
+
+#pragma multi_compile ___ UNITY_HDR_ON
+#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
+
+struct appdataBasic
 {
     float4 vertex : POSITION;
     float3 normal : NORMAL;
@@ -20,11 +29,94 @@ struct v2fBasic
 
 struct p2sBasic
 {
-    half4 albedo : SV_Target0;
-    half4 specular : SV_Target1;
-    half4 normal : SV_Target2;
-    half4 emission : SV_Target3;
+    half4 gBuffer0 : SV_Target0;
+    half4 gBuffer1 : SV_Target1;
+    half4 gBuffer2 : SV_Target2;
+    half4 gBuffer3 : SV_Target3;
 };
+
+float3 BoxProjection (
+	float3 direction, float3 position,
+	float4 cubemapPosition, float3 boxMin, float3 boxMax
+) {
+	#if UNITY_SPECCUBE_BOX_PROJECTION
+		UNITY_BRANCH
+		if (cubemapPosition.w > 0) {
+			float3 factors =
+				((direction > 0 ? boxMax : boxMin) - position) / direction;
+			float scalar = min(min(factors.x, factors.y), factors.z);
+			direction = direction * scalar + (position - cubemapPosition);
+		}
+	#endif
+	return direction;
+}
+
+UnityLight CreateLight () {
+	UnityLight light;
+    light.dir = float3(0, 1, 0);
+    light.color = 0;
+	return light;
+}
+
+UnityIndirect CreateIndirectLight (v2fBasic i, float3 viewDir, float3 normal, float ambient, float roughness, float metallic) {
+	UnityIndirect indirectLight;
+	indirectLight.diffuse = 0;
+	indirectLight.specular = 0;
+
+    #if defined(LIGHTMAP_ON)
+        indirectLight.diffuse =
+            DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, i.lightmapuv));
+        
+        #if defined(DIRLIGHTMAP_COMBINED)
+            float4 lightmapDirection = UNITY_SAMPLE_TEX2D_SAMPLER(unity_LightmapInd, unity_Lightmap, i.lightmapuv);
+            indirectLight.diffuse = DecodeDirectionalLightmap(indirectLight.diffuse, lightmapDirection, normal);
+        #endif
+    #else
+        indirectLight.diffuse += max(0, ShadeSH9(float4(normal, 1)));
+    #endif
+    float3 reflectionDir = reflect(-viewDir, normal);
+    Unity_GlossyEnvironmentData envData;
+    envData.roughness = 1 - roughness;
+    envData.reflUVW = BoxProjection(
+        reflectionDir, i.worldPos.xyz,
+        unity_SpecCube0_ProbePosition,
+        unity_SpecCube0_BoxMin, unity_SpecCube0_BoxMax
+    );
+    float3 probe0 = Unity_GlossyEnvironment(
+        UNITY_PASS_TEXCUBE(unity_SpecCube0), unity_SpecCube0_HDR, envData
+    );
+    envData.reflUVW = BoxProjection(
+        reflectionDir, i.worldPos.xyz,
+        unity_SpecCube1_ProbePosition,
+        unity_SpecCube1_BoxMin, unity_SpecCube1_BoxMax
+    );
+    #if UNITY_SPECCUBE_BLENDING
+        float interpolator = unity_SpecCube0_BoxMin.w;
+        UNITY_BRANCH
+        if (interpolator < 0.99999) {
+            float3 probe1 = Unity_GlossyEnvironment(
+                UNITY_PASS_TEXCUBE_SAMPLER(unity_SpecCube1, unity_SpecCube0),
+                unity_SpecCube0_HDR, envData
+            );
+            indirectLight.specular = lerp(probe1, probe0, interpolator);
+        }
+        else {
+            indirectLight.specular = probe0;
+        }
+    #else
+        indirectLight.specular = probe0;
+    #endif
+
+    float occlusion = ambient;
+    indirectLight.diffuse *= occlusion;
+    indirectLight.specular *= occlusion;
+
+    #if UNITY_ENABLE_REFLECTION_BUFFERS
+        indirectLight.specular = 0;
+    #endif
+
+	return indirectLight;
+}
 
 v2fBasic vertBasic (appdataBasic v) 
 {
@@ -76,8 +168,17 @@ p2sBasic fragBasic (v2fBasic vs)
     half4 albedoMap = tex2D(_AlbedoMap, vs.uv);
     half4 aRMMap = tex2D(_ARMMap, vs.uv);
     half4 emissionMap = tex2D(_EmissionMap, vs.uv);
-    half3 albedo = albedoMap.rgb * _Color.rgb * pow(aRMMap.r, _AmbientIntensity);
-    half3 specularMap;	
+    float occlusion = lerp(1, aRMMap.r, _AmbientIntensity);
+    float3 albedoColor = albedoMap * _Color.rgb;
+    float metallic = lerp(0.0, 1.0, aRMMap.b * _Metallic);
+    half3 specularMap;
+    float alpha = albedoMap.a * _Color.a;
+    float roughness = lerp(1.0, 1.0 - aRMMap.g, _Roughness);
+    float3 emission = emissionMap.rgb * _EmissionIntensity * _EmissionColorGain * _EmissionColor.rgb * _EmissionColor.a;
+
+    float3 specularTint;
+	float oneMinusReflectivity;
+	float3 albedo = DiffuseAndSpecularFromMetallic(albedoColor, metallic, specularTint, oneMinusReflectivity);	
 
     float3 normalDirection = normalize(vs.normal);
     half3 normalMap = UnpackNormal(tex2D(_BumpMap, vs.uv));
@@ -95,22 +196,32 @@ p2sBasic fragBasic (v2fBasic vs)
     rimIntensity = smoothstep(1.0 - _RimAmount - 0.01, 1.0 - _RimAmount + 0.01, rimIntensity);
     float4 rim = rimIntensity * _LightColor;
 
-    half specularMonochrome;
-    half3 diffuseColor = DiffuseAndSpecularFromMetallic(albedo, aRMMap.b * (1 - _Metallic), specularMap, specularMonochrome );
-    ps.albedo = half4( diffuseColor, 1.0 );
-    ps.albedo += ps.albedo * rim * max(_RimIntensity, 0.0) ;// * (1.0 - aRMMap.b);
-    ps.albedo = saturate(ps.albedo);
+    float4 color = UNITY_BRDF_PBS(
+		albedo, specularTint,
+		oneMinusReflectivity, roughness,
+		worldNormal, viewDir,
+		CreateLight(), CreateIndirectLight(vs, viewDir, worldNormal, occlusion, roughness, metallic)
+	);
 
+    ps.gBuffer0 = float4(albedo, occlusion);
+    //ps.gBuffer0 = float4(lerp(albedo, (1.0 - rimIntensity) * _LightColor.rgb, _RimIntensity), occlusion);
+    //ps.gBuffer0 += ps.gBuffer0 * rim * max(_RimIntensity, 0.0) ;// * (1.0 - aRMMap.b);
+    //ps.gBuffer0 = saturate(ps.gBuffer0);
+
+    /*
     #ifndef LIGHTMAP_OFF
-    fixed3 lightMap = DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, vs.lightmapuv));
-    ps.albedo.rgb = lerp(ps.albedo.rgb + (ps.albedo.rgb * pow(lightMap, _LightMapIntensity)), ps.albedo.rgb * pow(lightMap, _LightMapIntensity), _LightMapShadowIntensity);
-    ps.albedo = saturate(ps.albedo);
+        fixed3 lightMap = DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, vs.lightmapuv));
+        ps.gBuffer0.rgb = lerp(ps.gBuffer0.rgb + (ps.gBuffer0.rgb * pow(lightMap, _LightMapIntensity)), ps.gBuffer0.rgb * pow(lightMap, _LightMapIntensity), _LightMapShadowIntensity);
+        ps.gBuffer0 = saturate(ps.gBuffer0);
     #endif
-    ps.specular = aRMMap.g * (1.0 - min(_Roughness, 1.0)) * half4(albedo, 1.0 );
-    ps.normal = half4( worldNormal * 0.5 + 0.5, 1.0 );
-    ps.emission = half4((emissionMap * _EmissionIntensity * _EmissionColorGain).rgb, _EmissionIntensity * _EmissionColorGain) * _EmissionColor;
+    */
+    ps.gBuffer1 = float4(albedoColor * metallic, roughness);
+    ps.gBuffer2 = half4( worldNormal * 0.5 + 0.5, 1.0 );
+    ps.gBuffer3 = color + float4(emission, 1.0);
     #ifndef UNITY_HDR_ON
-        ps.emission.rgb = exp2(-ps.emission.rgb/max(1, _EmissionIntensity));
+        ps.gBuffer3.rgb = exp2(-ps.gBuffer3.rgb/max(1, _EmissionIntensity));
     #endif
     return ps;
 }
+
+#endif
