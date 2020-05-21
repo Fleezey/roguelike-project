@@ -56,6 +56,16 @@
          
 			CGPROGRAM
 
+			sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
+			float4 _AlbedoMap_ST;
+			float _worldPositionUvs, _uvMetric;
+
+			float4 _Color, _EmissionColor;
+			float _Metallic, _Roughness;
+			float _BumpIntensity, _AmbientIntensity;
+			float _RimAmount, _RimThreshold, _RimIntensity;
+			float _EmissionColorGain, _EmissionIntensity;
+			float _LightMapIntensity, _LightMapShadowIntensity;
 
 			#include "DefaultEnv.cginc"
 

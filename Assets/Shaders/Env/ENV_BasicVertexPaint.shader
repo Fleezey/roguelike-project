@@ -6,39 +6,39 @@ Shader "ENV/Basic Vertex Paint"
 	{
         // Red
         [VerticalBoxStart(Red Vertices, 1, 0.25, 0.25)]_VerticesStartR ("",int) = 0
-            [VerticalBoxStart(Albedo, 1, 0.25, 0.25, 2)]_AlbedoStart ("",int) = 0
-                _AlbedoMap ("Albedo Map", 2D) = "white" {}
-                [Toggle] _worldPositionUvs("World Position Uvs", Float) = 0
-                _uvMetric ("Uv Metric", float) = 10.0
-                [HDR] _Color ("Color", Color) = (1,1,1,1)
-            [VerticalBoxEnd]_AlbedoEnd ("",int) = 0
+            [VerticalBoxStart(Albedo, 1, 0.25, 0.25, 2)]_AlbedoStartR ("",int) = 0
+                _AlbedoMapR ("Albedo Map", 2D) = "white" {}
+                [Toggle] _worldPositionUvsR("World Position Uvs", Float) = 0
+                _uvMetricR ("Uv Metric", float) = 10.0
+                [HDR] _ColorR ("Color", Color) = (1,1,1,1)
+            [VerticalBoxEnd]_AlbedoEndR ("",int) = 0
 
-            [VerticalBoxStart(Normal, 1, 0.25, 0.25, 2)]_NormalStart ("",int) = 0
-                [NoScaleOffset]_BumpMap ("Normal Map", 2D) = "white" {}
-                _BumpIntensity ("Normal Intensity", Range(0.001, 10.0)) = 1.0
-            [VerticalBoxEnd]_NormalEnd ("",int) = 0	
+            [VerticalBoxStart(Normal, 1, 0.25, 0.25, 2)]_NormalStartR ("",int) = 0
+                [NoScaleOffset]_BumpMapR ("Normal Map", 2D) = "white" {}
+                _BumpIntensityR ("Normal Intensity", Range(0.001, 10.0)) = 1.0
+            [VerticalBoxEnd]_NormalEndR ("",int) = 0	
             
-            [VerticalBoxStart(Ambient Roughness Metallic, 1, 0.25, 0.25, 2)]_ARMStart ("",int) = 0
-                [NoScaleOffset]_ARMMap ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
-                _AmbientIntensity ("Ambient Occlusion Intensity", Range(0.0, 10.0)) = 1.0
-                _Metallic ("Metallic", Range(0, 1)) = 1
-                _Roughness ("Roughness", float) = 0.5
-            [VerticalBoxEnd]_ARMEnd ("",int) = 0
+            [VerticalBoxStart(Ambient Roughness Metallic, 1, 0.25, 0.25, 2)]_ARMStartR ("",int) = 0
+                [NoScaleOffset]_ARMMapR ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
+                _AmbientIntensityR ("Ambient Occlusion Intensity", Range(0.0, 10.0)) = 1.0
+                _MetallicR ("Metallic", Range(0, 1)) = 1
+                _RoughnessR ("Roughness", float) = 0.5
+            [VerticalBoxEnd]_ARMEndR ("",int) = 0
 
-            [VerticalBoxStart(Lighting, 1, 0.25, 0.25, 2)]_LightingStart ("",int) = 0
-                [VerticalBoxStart(Rim Light, 1, 0.25, 0.25, 3)]_RimLightStart ("",int) = 0
-                    _RimAmount ("Rim Amount", Range(0, 1)) = 0.716
-                    _RimThreshold ("Rim Threshold", Range(0, 1)) = 0.1
-                    _RimIntensity ("Rim Intensity", float) = 1.0
-                [VerticalBoxEnd]_RimLightEnd ("",int) = 0
+            [VerticalBoxStart(Lighting, 1, 0.25, 0.25, 2)]_LightingStartR ("",int) = 0
+                [VerticalBoxStart(Rim Light, 1, 0.25, 0.25, 3)]_RimLightStartR ("",int) = 0
+                    _RimAmountR ("Rim Amount", Range(0, 1)) = 0.716
+                    _RimThresholdR ("Rim Threshold", Range(0, 1)) = 0.1
+                    _RimIntensityR ("Rim Intensity", float) = 1.0
+                [VerticalBoxEnd]_RimLightEndR ("",int) = 0
 
-                [VerticalBoxStart(Emission, 1, 0.25, 0.25, 3)]_EmissionStart ("",int) = 0
-                    [NoScaleOffset]_EmissionMap ("Emission Map", 2D) = "black" {}
-                    [HDR]_EmissionColor ("Color", Color) = (1,1,1)
-                    _EmissionColorGain ("Emission Color Gain", float) = 1.0
-                    _EmissionIntensity ("Emission Intensity", float) = 1.0
-                [VerticalBoxEnd]_EmissionEnd ("",int) = 0
-            [VerticalBoxEnd]_LightingEnd ("",int) = 0
+                [VerticalBoxStart(Emission, 1, 0.25, 0.25, 3)]_EmissionStartR ("",int) = 0
+                    [NoScaleOffset]_EmissionMapR ("Emission Map", 2D) = "black" {}
+                    [HDR]_EmissionColorR ("Color", Color) = (1,1,1)
+                    _EmissionColorGainR ("Emission Color Gain", float) = 1.0
+                    _EmissionIntensityR ("Emission Intensity", float) = 1.0
+                [VerticalBoxEnd]_EmissionEndR ("",int) = 0
+            [VerticalBoxEnd]_LightingEndR ("",int) = 0
         [VerticalBoxEnd]_VerticesEndR("",int) = 0
 
         // Green
@@ -128,16 +128,6 @@ Shader "ENV/Basic Vertex Paint"
 		#include "AutoLight.cginc"
         #include "Lighting.cginc"
 
-		sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
-		float4 _Color, _EmissionColor;
-		float _Metallic, _Roughness;
-		float4 _AlbedoMap_ST;
-		float _BumpIntensity, _AmbientIntensity;
-		float _RimAmount, _RimThreshold, _RimIntensity;
-		float _EmissionColorGain, _EmissionIntensity;
-		float _LightMapIntensity, _LightMapShadowIntensity;
-		float _worldPositionUvs, _uvMetric;
-
 		ENDCG
 
 		Pass 
@@ -145,9 +135,52 @@ Shader "ENV/Basic Vertex Paint"
 			Tags {"LightMode"="Deferred"}
          
 			CGPROGRAM
-			#include "DefaultEnv.cginc"
-			#pragma vertex vertBasic
-			#pragma fragment fragBasic
+            sampler2D _AlbedoMap, _BumpMap, _ARMMap, _EmissionMap;
+            float4 _AlbedoMap_ST;
+            float _worldPositionUvs, _uvMetric;
+
+            float4 _Color, _EmissionColor;
+            float _Metallic, _Roughness;
+            float _BumpIntensity, _AmbientIntensity;
+            float _RimAmount, _RimThreshold, _RimIntensity;
+            float _EmissionColorGain, _EmissionIntensity;
+
+            sampler2D _AlbedoMapR, _BumpMapR, _ARMMapR, _EmissionMapR;
+            float4 _AlbedoMapR_ST;
+            float _worldPositionUvsR, _uvMetricR;
+
+            float4 _ColorR, _EmissionColorR;
+            float _MetallicR, _RoughnessR;
+            float _BumpIntensityR, _AmbientIntensityR;
+            float _RimAmountR, _RimThresholdR, _RimIntensityR;
+            float _EmissionColorGainR, _EmissionIntensityR;
+
+            sampler2D _AlbedoMapG, _BumpMapG, _ARMMapG, _EmissionMapG;
+            float4 _AlbedoMapG_ST;
+            float _worldPositionUvsG, _uvMetricG;
+
+            float4 _ColorG, _EmissionColorG;
+            float _MetallicG, _RoughnessG;
+            float _BumpIntensityG, _AmbientIntensityG;
+            float _RimAmountG, _RimThresholdG, _RimIntensityG;
+            float _EmissionColorGainG, _EmissionIntensityG;
+
+            sampler2D _AlbedoMapB, _BumpMapB, _ARMMapB, _EmissionMapB;
+            float4 _AlbedoMapB_ST;
+            float _worldPositionUvsB, _uvMetricB;
+
+            float4 _ColorB, _EmissionColorB;
+            float _MetallicB, _RoughnessB;
+            float _BumpIntensityB, _AmbientIntensityB;
+            float _RimAmountB, _RimThresholdB, _RimIntensityB;
+            float _EmissionColorGainB, _EmissionIntensityB;
+
+            float _LightMapIntensity, _LightMapShadowIntensity;
+
+            #include "DefaultEnvVC.cginc"
+
+			#pragma vertex vertBasic3VC
+			#pragma fragment fragBasic3VC
 			#pragma exclude_renderers nomrt
 			#pragma multi_compile ___ UNITY_HDR_ON
 			#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
@@ -156,5 +189,5 @@ Shader "ENV/Basic Vertex Paint"
 			ENDCG
 		}
 	}
-	FallBack "CustomDeferredShading"
+	FallBack "VertexLit"
 }

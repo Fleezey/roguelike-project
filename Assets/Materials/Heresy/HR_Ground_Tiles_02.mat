@@ -47,7 +47,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _AlbedoMap:
         m_Texture: {fileID: 2800000, guid: 7f30758cb65dddb4180b2c667940bf64, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
@@ -166,10 +166,10 @@ Material:
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _AmbientIntensity: 1.35
+    - _AmbientIntensity: 1.5
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _BumpIntensity: 2
+    - _BumpIntensity: 1
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -203,6 +203,7 @@ Material:
     - _Emi: 0.716
     - _EmissionColorBoost: 1
     - _EmissionColorGain: 1
+    - _EmissionEnd: 0
     - _EmissionIntensity: 0
     - _EmissionStart: 0
     - _EmissiveColorMode: 1
@@ -228,11 +229,13 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
+    - _LightMapIntensity: 1
+    - _LightMapShadowIntensity: 1
     - _LightingEnd: 0
     - _LightingStart: 0
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _Metallic: 0
+    - _Metallic: 1
     - _Metalness: 0
     - _NormalEnd: 0
     - _NormalMapSpace: 0
@@ -246,11 +249,11 @@ Material:
     - _ReceivesSSR: 1
     - _RefractionModel: 0
     - _RimAmount: 0.2
-    - _RimIntensity: 5
+    - _RimIntensity: 0.25
     - _RimLightEnd: 0
     - _RimLightStart: 0
-    - _RimThreshold: 0.1
-    - _Roughness: 0.5
+    - _RimThreshold: 0.5
+    - _Roughness: 1
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1
@@ -294,6 +297,8 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
+    - _uvMetric: 10
+    - _worldPositionUvs: 0
     m_Colors:
     - _Albedo: {r: 1, g: 1, b: 1, a: 1}
     - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}

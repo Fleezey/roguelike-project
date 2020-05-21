@@ -167,9 +167,10 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _AmbientIntensity: 0.9
+    - _AmbientPow: 1
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _BumpIntensity: 2
+    - _BumpIntensity: 1
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -228,7 +229,7 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LightMapIntensity: 10
+    - _LightMapIntensity: 1
     - _LightMapPower: 1
     - _LightMapShadowIntensity: 1
     - _LightingEnd: 0
@@ -248,12 +249,12 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
     - _RefractionModel: 0
-    - _RimAmount: 0.178
+    - _RimAmount: 0.06
     - _RimIntensity: 2
     - _RimLightEnd: 0
     - _RimLightStart: 0
-    - _RimThreshold: 0.495
-    - _Roughness: 0.1
+    - _RimThreshold: 0.09
+    - _Roughness: 1
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1
