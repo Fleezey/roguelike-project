@@ -28,7 +28,9 @@ v2fBasic vertBasicVCMove (appdataBasicVC v)
     vOut.uv = v.uv;
     
     // Move vertices
-    vOut.vertex += v.color.r * lerp(_RedStartMove, _RedEndMove, _LinearMove) + v.color.g * lerp(_GreenStartMove, _GreenEndMove, _LinearMove) + v.color.b * lerp(_BlueStartMove, _BlueEndMove, _LinearMove);
+    vOut.vertex += v.color.r * lerp(_RedStartMove, _RedEndMove, pow(pow(_LinearMove, _RedStartMove.w), 1/_RedEndMove.w));
+    vOut.vertex += v.color.g * lerp(_GreenStartMove, _GreenEndMove, pow(pow(_LinearMove, _GreenStartMove.w), 1/_GreenEndMove.w));
+    vOut.vertex += v.color.b * lerp(_BlueStartMove, _BlueEndMove, pow(pow(_LinearMove, _BlueStartMove.w), 1/_BlueEndMove.w));
     
     vars.albedoMap = _AlbedoMap;
     vars.albedoMap_ST = _AlbedoMap_ST;

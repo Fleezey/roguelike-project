@@ -247,7 +247,7 @@ p2sBasic fragBasicCalc (v2fBasic vs, fragVars vars, float2 uv)
     float rimDot = 1.0 - dot(worldNormal, viewDir);
     float rimIntensity = rimDot * pow(NdotL, vars.rimThreshold);
     rimIntensity = smoothstep(1.0 - vars.rimAmount - 0.01, 1.0 - vars.rimAmount + 0.01, rimIntensity);
-    float4 rim = rimIntensity * _LightColor;
+    float4 rim = rimIntensity;
 
     float4 color = UNITY_BRDF_PBS(albedo, specularTint, oneMinusReflectivity, roughness, worldNormal, viewDir,
 		CreateLight(), CreateIndirectLight(vs, viewDir, worldNormal, occlusion, roughness, metallic, vars.lightMapIntensity, vars.lightMapShadowIntensity)

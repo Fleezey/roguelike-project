@@ -43,16 +43,16 @@ Shader "ENV/Basic Vertex Color Linear Move"
 		[VerticalBoxStart(Move)]_MoveStart ("",int) = 0
 			_LinearMove ("Linear Move", Range(0, 1)) = 0
 			[VerticalBoxStart(Move Offset, 1, 0.25, 0.25, 2)]_MoveStartR ("",int) = 0
-				_RedStartMove ("Red Start Move", Vector) = (0,0,0,0)
-				_RedEndMove ("Red End Move", Vector) = (0,0,0,0)
+				_RedStartMove ("Start XYZ, Exponent W", Vector) = (0,0,0,1)
+				_RedEndMove ("End XYZ, Exponent W", Vector) = (0,0,0,1)
 			[VerticalBoxEnd]_MoveEndR ("",int) = 0
 			[VerticalBoxStart(Move Offset, 0.25, 1, 0.25, 2)]_MoveStartG ("",int) = 0
-				_GreenStartMove ("Green Start Move", Vector) = (0,0,0,0)
-				_GreenEndMove ("Green End Move", Vector) = (0,0,0,0)
+				_GreenStartMove ("Start XYZ, Exponent W", Vector) = (0,0,0,1)
+				_GreenEndMove ("End XYZ, Exponent W", Vector) = (0,0,0,1)
 			[VerticalBoxEnd]_MoveEndG ("",int) = 0
 			[VerticalBoxStart(Move Offset, 0.25, 0.5, 1, 2)]_MoveStartB ("",int) = 0
-				_BlueStartMove ("Blue Start Move", Vector) = (0,0,0,0)
-				_BlueEndMove ("Blue End Move", Vector) = (0,0,0,0)
+				_BlueStartMove ("Start XYZ, Exponent W", Vector) = (0,0,0,1)
+				_BlueEndMove ("End XYZ, Exponent W", Vector) = (0,0,0,1)
 			[VerticalBoxEnd]_MoveEndB ("",int) = 0
 		[VerticalBoxEnd]_MoveEnd ("",int) = 0
 	}

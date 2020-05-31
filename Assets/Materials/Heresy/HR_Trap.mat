@@ -85,8 +85,8 @@ Material:
     - _LightMapShadowIntensity: 1
     - _LightingEnd: 0
     - _LightingStart: 0
-    - _LinearMove: 0.439
-    - _Metallic: 0.187
+    - _LinearMove: 1
+    - _Metallic: 0
     - _Mode: 0
     - _MoveEnd: 0
     - _MoveEndB: 0
@@ -101,11 +101,11 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RimAmount: 0.2
-    - _RimIntensity: 0.25
+    - _RimIntensity: 0
     - _RimLightEnd: 0
     - _RimLightStart: 0
     - _RimThreshold: 0.5
-    - _Roughness: 1
+    - _Roughness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -114,13 +114,13 @@ Material:
     - _uvMetric: 10
     - _worldPositionUvs: 0
     m_Colors:
-    - _BlueEndMove: {r: 0, g: 0, b: 0, a: 0}
-    - _BlueStartMove: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _BlueEndMove: {r: 0, g: 0, b: 0, a: 1}
+    - _BlueStartMove: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DefaultEndMove: {r: 0, g: 0, b: 0, a: 0}
     - _DefaultStartMove: {r: 0, g: -10, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GreenEndMove: {r: 0, g: 0, b: 0, a: 0}
-    - _GreenStartMove: {r: 0, g: 0, b: 0, a: 0}
-    - _RedEndMove: {r: 0, g: 0, b: 0, a: 0}
-    - _RedStartMove: {r: 0, g: -1, b: 0, a: 0}
+    - _GreenEndMove: {r: 0, g: 0, b: 0, a: 1}
+    - _GreenStartMove: {r: 0, g: 0, b: 0, a: 1}
+    - _RedEndMove: {r: 0, g: 0, b: 0, a: 1}
+    - _RedStartMove: {r: 0, g: -1, b: 0, a: 5}
