@@ -86,7 +86,7 @@ Material:
     - _ARMStart: 0
     - _AlbedoEnd: 0
     - _AlbedoStart: 0
-    - _AmbientIntensity: 1
+    - _AmbientIntensity: 0
     - _BumpIntensity: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -103,7 +103,7 @@ Material:
     - _LightMapShadowIntensity: 1
     - _LightingEnd: 0
     - _LightingStart: 0
-    - _Metallic: 0
+    - _Metallic: 0.565
     - _Mode: 0
     - _NormalEnd: 0
     - _NormalStart: 0
@@ -114,7 +114,7 @@ Material:
     - _RimLightEnd: 0
     - _RimLightStart: 0
     - _RimThreshold: 0.1
-    - _Roughness: -0.38
+    - _Roughness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

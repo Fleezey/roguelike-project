@@ -228,7 +228,7 @@ Material:
     - _DstBlend: 0
     - _Emi: 0.716
     - _EmissionColorBoost: 1
-    - _EmissionColorGain: 5.55
+    - _EmissionColorGain: 1
     - _EmissionDistance: 11
     - _EmissionEnd: 0
     - _EmissionIntensity: 1
@@ -334,7 +334,7 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
-    - _uvMetric: 10
+    - _uvMetric: 1
     - _worldPositionUvs: 1
     m_Colors:
     - _Albedo: {r: 1, g: 1, b: 1, a: 1}

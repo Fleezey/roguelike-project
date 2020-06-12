@@ -41,7 +41,7 @@
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
         LOD 200
-        //Cull Off
+        Cull Off
 
         Pass {
             CGPROGRAM

@@ -170,7 +170,7 @@ Material:
     - _AmbientPow: 1
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _BumpIntensity: 2.21
+    - _BumpIntensity: 1
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -250,11 +250,11 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
     - _RefractionModel: 0
-    - _RimAmount: 0.09
-    - _RimIntensity: 0.25
+    - _RimAmount: 0
+    - _RimIntensity: 0
     - _RimLightEnd: 0
     - _RimLightStart: 0
-    - _RimThreshold: 0.5
+    - _RimThreshold: 0.2
     - _Roughness: 1
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10

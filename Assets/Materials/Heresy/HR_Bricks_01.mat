@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: HR_Bricks_01
   m_Shader: {fileID: 4800000, guid: ec815fc31eebb9d40b30766a2204549b, type: 3}
-  m_ShaderKeywords: _NORMALMAP _NORMALMAP_TANGENT_SPACE _WORLDPOSITIONUVS_ON
+  m_ShaderKeywords: _NORMALMAP _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -298,7 +298,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - _uvMetric: 3
-    - _worldPositionUvs: 1
+    - _worldPositionUvs: 0
     m_Colors:
     - _Albedo: {r: 1, g: 1, b: 1, a: 1}
     - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}

@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Unlit_FX_Tentacles
+  m_Shader: {fileID: 4800000, guid: 1933b77bb38aefa468867177fb050d74, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FireMask:
+        m_Texture: {fileID: 2800000, guid: cc4f05fdcc4adf2419688da7b032e2b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: cc4f05fdcc4adf2419688da7b032e2b9, type: 3}
+        m_Scale: {x: 2, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Amplitude: 0.4
+    - _AnimationSpeed: 1.98
+    - _DirectionFrom: 0
+    - _DirectionMult: 0.75
+    - _DirectionPow: 2
+    - _Displacement: 2
+    - _DisplacementBiTan: 0.5
+    - _DisplacementEnd: 0
+    - _DisplacementNorm: 0.5
+    - _DisplacementStart: 0
+    - _DstBlend: 10
+    - _FireDirection: 0
+    - _FireHeight: 1
+    - _FireMaskEnd: 0
+    - _FireMaskMainEnd: 0
+    - _FireMaskMainSize: 1
+    - _FireMaskMainSpeed: 1
+    - _FireMaskMainStart: 0
+    - _FireMaskPow: 1
+    - _FireMaskStart: 0
+    - _FireMaskSubEnd: 0
+    - _FireMaskSubSize: 1
+    - _FireMaskSubSpeed: 1
+    - _FireMaskSubStart: 0
+    - _FireShapeEnd: 0
+    - _FireShapeMoveEnd: 0
+    - _FireShapeMoveStart: 0
+    - _FireShapeStart: 0
+    - _FireWidth: 1
+    - _FireXPosition: 0
+    - _FireYPosition: 0
+    - _Frequency: 8
+    - _LineEnd: 0
+    - _LineStart: 0
+    - _MaskEffectEnd: 0
+    - _MaskEffectStart: 0
+    - _MaskEnd: 0
+    - _MaskSpeed: -0.25
+    - _MaskStart: 0
+    - _Metallic: 0
+    - _Smoothness: 0
+    - _SrcBlend: 5
+    - _UvAlpha: 1
+    - _UvAlphaFrontMult: 5
+    - _UvAlphaFrontPow: 3
+    - _UvAlphaMult: 0.75
+    - _UvLightAdd: 0.285
+    - _UvYPow: 1
+    m_Colors:
+    - _Color: {r: 0.12831211, g: 0, b: 1, a: 1}
+    - _DirectionFrom: {r: 2.83, g: 0, b: 0, a: 5}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
+    - _FireScale: {r: 1, g: 1, b: 1, a: 1}
+    - _FireWiggle: {r: 1, g: 1, b: 0, a: 0}
+    - _FireWiggleSpeed: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskIntensity: {r: 2, g: 1, b: 1, a: 1.5}
+    - _UvAlpha: {r: 2, g: 1, b: 5, a: 3}
+    - _UvLight: {r: 20, g: 5, b: 3.75, a: 1}
+    - _WaveDisplacement: {r: 1, g: 1.65, b: 2, a: 0}
+    - _WaveDisplacementBiTan: {r: 0.5, g: 4, b: 2, a: -0.5}
+    - _WaveDisplacementNorm: {r: 0.25, g: 4, b: 3, a: 0}
