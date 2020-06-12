@@ -16,8 +16,8 @@ Shader "ENV/Basic"
 			_BumpIntensity ("Normal Intensity", Range(0.001, 10.0)) = 1.0
 		[VerticalBoxEnd]_NormalEnd ("",int) = 0	
 		
-		[VerticalBoxStart(Ambient Roughness Metallic)]_ARMStart ("",int) = 0
-			[NoScaleOffset]_ARMMap ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
+		[VerticalBoxStart(Ambient Roughness Metallic Height)]_ARMStart ("",int) = 0
+			[NoScaleOffset]_ARMMap ("ARMH Map", 2D) = "white" {} // Ambient, Roughness & Metallic
 			_AmbientIntensity ("Ambient Occlusion Intensity", Range(0.0, 100.0)) = 1.0
 			_Metallic ("Metallic", Range(0, 1)) = 1
 			_Roughness ("Roughness", Float) = 0.5

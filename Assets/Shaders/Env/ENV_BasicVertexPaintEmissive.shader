@@ -18,8 +18,8 @@ Shader "ENV/Basic Vertex Paint"
                 _BumpIntensityR ("Normal Intensity", Range(0.001, 10.0)) = 1.0
             [VerticalBoxEnd]_NormalEndR ("",int) = 0	
             
-            [VerticalBoxStart(Ambient Roughness Metallic, 1, 0.25, 0.25, 2)]_ARMStartR ("",int) = 0
-                [NoScaleOffset]_ARMMapR ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
+            [VerticalBoxStart(Ambient Roughness Metallic Height, 1, 0.25, 0.25, 2)]_ARMStartR ("",int) = 0
+                [NoScaleOffset]_ARMMapR ("ARMH Map", 2D) = "white" {} // Ambient, Roughness & Metallic
                 _AmbientIntensityR ("Ambient Occlusion Intensity", Range(0.0, 10.0)) = 1.0
                 _MetallicR ("Metallic", Range(0, 1)) = 1
                 _RoughnessR ("Roughness", float) = 0.5
@@ -55,8 +55,8 @@ Shader "ENV/Basic Vertex Paint"
                 _BumpIntensityG ("Normal Intensity", Range(0.001, 10.0)) = 1.0
             [VerticalBoxEnd]_NormalEndG ("",int) = 0	
             
-            [VerticalBoxStart(Ambient Roughness Metallic, 0.25, 1, 0.25, 2)]_ARMStartG ("",int) = 0
-                [NoScaleOffset]_ARMMapG ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
+            [VerticalBoxStart(Ambient Roughness Metallic Height, 0.25, 1, 0.25, 2)]_ARMStartG ("",int) = 0
+                [NoScaleOffset]_ARMMapG ("ARMH Map", 2D) = "white" {} // Ambient, Roughness & Metallic
                 _AmbientIntensityG ("Ambient Occlusion Intensity", Range(0.0, 10.0)) = 1.0
                 _MetallicG ("Metallic", Range(0, 1)) = 1
                 _RoughnessG ("Roughness", float) = 0.5
@@ -92,8 +92,8 @@ Shader "ENV/Basic Vertex Paint"
                 _BumpIntensityB ("Normal Intensity", Range(0.001, 10.0)) = 1.0
             [VerticalBoxEnd]_NormalEndB ("",int) = 0	
             
-            [VerticalBoxStart(Ambient Roughness Metallic, 0.25, 0.5, 1, 2)]_ARMStartB ("",int) = 0
-                [NoScaleOffset]_ARMMapB ("ARM Map", 2D) = "white" {} // Ambient, Roughness & Metallic
+            [VerticalBoxStart(Ambient Roughness Metallic Height, 0.25, 0.5, 1, 2)]_ARMStartB ("",int) = 0
+                [NoScaleOffset]_ARMMapB ("ARMH Map", 2D) = "white" {} // Ambient, Roughness & Metallic
                 _AmbientIntensityB ("Ambient Occlusion Intensity", Range(0.0, 10.0)) = 1.0
                 _MetallicB ("Metallic", Range(0, 1)) = 1
                 _RoughnessB ("Roughness", float) = 0.5
