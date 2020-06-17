@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2974270078526615638
+--- !u!1 &7822345630262870673
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2242198019815506501}
-  - component: {fileID: 7081599832908839027}
-  - component: {fileID: 3565281817985860746}
-  - component: {fileID: 6514272102710582256}
+  - component: {fileID: 6545371000864977026}
+  - component: {fileID: 2850447061428210356}
+  - component: {fileID: 8408884520467035725}
+  - component: {fileID: 5132997659581298660}
+  - component: {fileID: 8900546388277062186}
   m_Layer: 0
-  m_Name: SM_HR_Spikes
+  m_Name: Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2242198019815506501
+--- !u!4 &6545371000864977026
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974270078526615638}
+  m_GameObject: {fileID: 7822345630262870673}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.4602084, y: 0.5742131, z: 15.653779}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,21 +34,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7081599832908839027
+--- !u!33 &2850447061428210356
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974270078526615638}
+  m_GameObject: {fileID: 7822345630262870673}
   m_Mesh: {fileID: 4705517400238478165, guid: 640c554a3cd00154aaac632f85ab682c, type: 3}
---- !u!23 &3565281817985860746
+--- !u!23 &8408884520467035725
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974270078526615638}
+  m_GameObject: {fileID: 7822345630262870673}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -80,23 +81,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6514272102710582256
+--- !u!114 &5132997659581298660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974270078526615638}
+  m_GameObject: {fileID: 7822345630262870673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194934199a995784fa16b5489692a5ee, type: 3}
+  m_Script: {fileID: 11500000, guid: a4c0b8cd77db04c90adbb38962e69961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaterialIndex: 0
-  m_MovePropertyName: _LinearMove
-  m_ActivationTime: 0.175
-  m_ThrustDelay: 0.5
-  m_ThrustTime: 0.225
-  m_DeactivationDelay: 1
-  m_DeactivationTime: 1
-  m_ActivateMove: 0.625
+  m_Damage: 1
+  m_SpikeMaterialIndex: 0
+  m_SpikeShaderName: ENV/Basic Vertex Color Linear Move
+  m_SpikeMoveProperty: _LinearMove
+--- !u!65 &8900546388277062186
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822345630262870673}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.7, y: 1.15, z: 2.4}
+  m_Center: {x: 0, y: 0, z: 0}
