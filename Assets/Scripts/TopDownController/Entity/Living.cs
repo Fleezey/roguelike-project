@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -8,6 +9,8 @@ namespace FGSX.TopDownController.Entity
     {
         public float Health { get; protected set; }
         public float MaxHealth { get; protected set; }
+        public float RecoveryTime { get; protected set; }
+        public bool IsRecovering { get; protected set; }
 
         public event Action m_OnDeath;
 
@@ -17,7 +20,8 @@ namespace FGSX.TopDownController.Entity
         protected override void Start()
         {
             base.Start();
-            Health = MaxHealth;     
+            Health = MaxHealth;
+            RecoveryTime = 0f;
         }
 
 
@@ -28,12 +32,19 @@ namespace FGSX.TopDownController.Entity
 
         public virtual void TakeDamage(float damage)
         {
+            if (IsRecovering)
+            {
+                return;
+            }
+
             Health -= damage;
 
             if (Health <= 0 && !m_IsDead)
             {
                 Die();
             }
+
+            StartCoroutine(Recovery());
         }
 
         [ContextMenu("Self Destruct")]
@@ -47,6 +58,22 @@ namespace FGSX.TopDownController.Entity
             }
 
             Destroy(gameObject);
+        }
+
+
+        private IEnumerator Recovery()
+        {
+            IsRecovering = true;
+            float elapsed = 0f;
+            
+            while (elapsed < RecoveryTime)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            IsRecovering = false;
+            yield break;
         }
     }
 }

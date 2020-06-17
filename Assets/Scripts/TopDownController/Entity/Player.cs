@@ -9,9 +9,17 @@ namespace FGSX.TopDownController.Entity
         public Crosshair Crosshair => m_Crosshair;
         public PlayerAnimations PlayerAnimations => m_PlayerAnimations;
 
+        [Header("Properties")]
+        [SerializeField] private float m_Health = 3f;
+        [SerializeField] private float m_MaxHealth = 3f;
+        [SerializeField] private float m_RecoveryTime = 1f;
+
+        [Header("References")]
         [SerializeField] private Animator m_Animator;
         [SerializeField] private Crosshair m_Crosshair;
         [SerializeField] private PlayerAnimations m_PlayerAnimations;
+
+
         private Camera m_ViewCamera;
 
 
@@ -20,6 +28,14 @@ namespace FGSX.TopDownController.Entity
             base.Awake();
 
             m_ViewCamera = Camera.main;
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            Health = m_Health;
+            MaxHealth = m_MaxHealth;
+            RecoveryTime = m_RecoveryTime;
         }
 
         protected override void Update()
