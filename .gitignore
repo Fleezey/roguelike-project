@@ -7,7 +7,7 @@
 [Aa]ssets/[Pp]lugins/
 [Uu]serSettings/
 [Uu]IElementsSchemaPackage/
-[Pp]rojectSettings/
+# [Pp]rojectSettings/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # [Aa]ssets/AssetStoreTools*
@@ -61,3 +61,5 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+.DS_Store
