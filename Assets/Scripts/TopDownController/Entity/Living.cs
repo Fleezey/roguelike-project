@@ -16,11 +16,9 @@ namespace FGSX.TopDownController.Entity
             get => m_Health;
             protected set
             {
-                Debug.Log("Change health");
                 m_Health = value;
                 if (OnHealthChange != null)
                 {
-                    Debug.Log("Change health action");
                     OnHealthChange();
                 }
             }
@@ -68,7 +66,6 @@ namespace FGSX.TopDownController.Entity
             }
 
             Health -= damage;
-            Debug.Log("Take damage");
 
             if (Health <= 0 && !m_IsDead)
             {

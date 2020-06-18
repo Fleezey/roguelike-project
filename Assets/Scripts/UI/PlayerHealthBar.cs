@@ -71,7 +71,7 @@ namespace FGSX.UI
         [Serializable]
         private class HealthThreshold
         {
-            [SerializeField][Range(0, 1)] public float m_Percentage;
+            [SerializeField][Range(0f, 1f)] public float m_Percentage;
             [SerializeField] public Color m_Color;
         }
     }

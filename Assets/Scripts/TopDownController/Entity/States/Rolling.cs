@@ -20,7 +20,6 @@ namespace FGSX.TopDownController.Entity.State
 
             Player player = m_Entity as Player;
             player.Animator.SetTrigger("Roll");
-            Debug.Log("Rolling!");
             player.PlayerAnimations.m_OnRollEnd += onRollEnd;
         }
 
