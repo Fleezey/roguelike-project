@@ -213,6 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c67305039a06be40bc3fb91bb70ead2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Health: 5
+  m_MaxHealth: 5
+  m_RecoveryTime: 1
   m_Animator: {fileID: 3867916364829430142}
   m_Crosshair: {fileID: 1807320576366410216}
   m_PlayerAnimations: {fileID: 5165384766603508084}

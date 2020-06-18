@@ -7,14 +7,44 @@ namespace FGSX.TopDownController.Entity
 {
     public abstract class Living : Entity
     {
-        public float Health { get; protected set; }
-        public float MaxHealth { get; protected set; }
+        public event Action m_OnDeath;
+        public event Action OnHealthChange;
+        public event Action OnMaxHealthChange;
+
+        public float Health
+        {
+            get => m_Health;
+            protected set
+            {
+                Debug.Log("Change health");
+                m_Health = value;
+                if (OnHealthChange != null)
+                {
+                    Debug.Log("Change health action");
+                    OnHealthChange();
+                }
+            }
+        }
+
+        public float MaxHealth
+        {
+            get => m_MaxHealth;
+            protected set
+            {
+                m_MaxHealth = value;
+                if (OnMaxHealthChange != null)
+                {
+                    OnMaxHealthChange();
+                }
+            }
+        }
+
         public float RecoveryTime { get; protected set; }
         public bool IsRecovering { get; protected set; }
 
-        public event Action m_OnDeath;
-
         protected bool m_IsDead;
+        private float m_Health;
+        private float m_MaxHealth;
 
 
         protected override void Start()
@@ -38,13 +68,16 @@ namespace FGSX.TopDownController.Entity
             }
 
             Health -= damage;
+            Debug.Log("Take damage");
 
             if (Health <= 0 && !m_IsDead)
             {
                 Die();
             }
-
-            StartCoroutine(Recovery());
+            else
+            {
+                StartCoroutine(Recovery());
+            }
         }
 
         [ContextMenu("Self Destruct")]
