@@ -30,7 +30,7 @@ Material:
     m_Floats:
     - _Amplitude: 0.4
     - _AnimationSpeed: 1.98
-    - _DirectionFrom: 0
+    - _DirectionFrom: 0.94232285
     - _DirectionMult: 0.75
     - _DirectionPow: 2
     - _Displacement: 2
