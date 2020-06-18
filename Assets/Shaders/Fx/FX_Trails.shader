@@ -1,4 +1,4 @@
-﻿Shader "FX/Tentacles"
+﻿Shader "FX/Trails"
 {
     Properties
     {
@@ -20,6 +20,7 @@
         _DirectionFrom ("Direction From", Range(-0.5, 0.5)) = 0.5
         _DirectionPow ("Direction Power", Float) = 1.0
         _DirectionMult ("Direction Mult", Float) = 1.0
+        _TightEnd ("Thight End", Range(0.0, 1.0)) = 0.5
         [VerticalBoxEnd]_DisplacementEnd("",int) = 0
 
         [VerticalBoxStart(Line)]_LineStart("",int) = 0
@@ -36,7 +37,7 @@
 
     SubShader
     {
-        Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
+        Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "LightMode"="Always"}
         ZWrite Off
         Blend [_SrcBlend] [_DstBlend]
         LOD 200
@@ -55,7 +56,7 @@
         float4 _MaskIntensity;
 
         float4 _WaveDisplacementNorm, _WaveDisplacementBiTan;
-        float _DisplacementNorm, _DisplacementBiTan, _DirectionFrom, _DirectionPow, _DirectionMult;
+        float _DisplacementNorm, _DisplacementBiTan, _DirectionFrom, _DirectionPow, _DirectionMult, _TightEnd;
 
         float4 _UvLight, _UvAlpha;
         float _UvAlphaMult, _UvAlphaFrontPow, _UvAlphaFrontMult;
@@ -67,7 +68,7 @@
 
         float4 RotateAroundYInDegrees (float4 vertex, float degrees)
         {
-            float alpha = degrees * PI;
+            float alpha = degrees * PI / 180.0;
             float sina, cosa;
             sincos(alpha, sina, cosa);
             float2x2 m = float2x2(cosa, -sina, sina, cosa);
@@ -111,9 +112,10 @@
                 float3 bitangent = cross( v.normal, v.tangent.xyz ) * v.tangent.w * 0.5 + 0.5;
 
                 // Displacement
-                float4 newVertexPos = v.vertex + float4(v.normal * _DisplacementNorm * o.uv.y * sin(_Time.y * _WaveDisplacementNorm.z + o.uv.y * _WaveDisplacementNorm.y + randomV * PI2)%PI2 + v.normal/_WaveDisplacementNorm.x * _WaveDisplacementNorm.w * o.uv.y, 0.0) * _WaveDisplacementNorm.x;
+                float4 newVertexPos = v.vertex;
+                newVertexPos += float4(v.normal * _DisplacementNorm * o.uv.y * sin(_Time.y * _WaveDisplacementNorm.z + o.uv.y * _WaveDisplacementNorm.y + randomV * PI2)%PI2 + v.normal/_WaveDisplacementNorm.x * _WaveDisplacementNorm.w * o.uv.y, 0.0) * _WaveDisplacementNorm.x;
                 newVertexPos += v.vertex + float4(bitangent * _DisplacementBiTan * o.uv.y * cos(_Time.y * _WaveDisplacementBiTan.z + o.uv.y * _WaveDisplacementBiTan.y + randomV * PI2)%PI2  + bitangent/_WaveDisplacementBiTan.x * _WaveDisplacementBiTan.w * o.uv.y, 0.0) * _WaveDisplacementBiTan.x;
-                newVertexPos += float4(v.normal, 0.0) * o.uv.y * _WaveDisplacementNorm.x;
+                newVertexPos += float4(v.normal, 0.0) * pow(lerp(o.uv.y, 1.0-o.uv.y, _TightEnd), 2.0) * _WaveDisplacementNorm.x;
                 newVertexPos += float4(bitangent, 0.0) * o.uv.y * _WaveDisplacementBiTan.x;
                 newVertexPos = lerp(newVertexPos, RotateAroundYInDegrees(newVertexPos, _DirectionFrom), pow(o.uv.y, _DirectionPow) * _DirectionMult);
                 

@@ -10,6 +10,8 @@ public class CharacterTrail : MonoBehaviour
     [Header("Base Properties")]
     [SerializeField] private string m_MeshName = "Character Trail";
     [SerializeField] private bool m_RandomizeUvX = false;
+    [SerializeField] private Vector3 m_Offset = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField] private Material m_SharedMaterial = default;
 
     [Header("In Layer Properties")]
     [SerializeField] private int m_InLayerCount = 8;
@@ -37,10 +39,25 @@ public class CharacterTrail : MonoBehaviour
 
     [Header("Create")]
     [SerializeField] private bool m_Generate = false;
+    [SerializeField] private float m_Value = default;
+
+    [Header("Animation Properties")]
+    [SerializeField] private string m_MaterialProperty = "_DirectionFrom";
+    [SerializeField] private float m_TimeTick = default;
+    [SerializeField] private float m_Tick = default;
+    [SerializeField] private float m_TimeLoop = default;
+    [SerializeField] private float m_WaveIntensity = default;
+    [SerializeField] private int m_TrailLength = default;
+    [SerializeField] private float m_Damping = default;
+
 
     private MeshRenderer m_MeshRenderer;
     private MeshFilter m_MeshFilter;
-    private Mesh m_Mesh; 
+    private Mesh m_Mesh;
+
+    private float m_DirectionFrom;
+    private float m_Time;
+    private Vector3[] m_Directions;
 
     private void Awake()
     {
@@ -53,6 +70,8 @@ public class CharacterTrail : MonoBehaviour
         {
             m_MeshFilter = GetComponent<MeshFilter>();
         }
+
+        GenerateMesh();
     }
 
     private void Update()
@@ -61,6 +80,18 @@ public class CharacterTrail : MonoBehaviour
         {
             GenerateMesh();
         }
+    }
+
+    private void Start()
+    {
+        m_Directions = new Vector3[m_TrailLength];
+
+        for(int i = 0; i < m_TrailLength; i++)
+        {
+            m_Directions[i] = transform.forward;
+        }
+
+        StartCoroutine(TrailDirectionUpdate());
     }
 
     // Generate mesh vertices, normals, triangles
@@ -91,7 +122,7 @@ public class CharacterTrail : MonoBehaviour
             for( int iLC = 0; iLC < m_InLayerCount; iLC++ )
             {
                 int segCount = iLC *  inSegVertCount;
-                vertices[segCount] = Vector3.zero;
+                vertices[segCount] = m_Offset;
                 int randomInt = Random.Range(0, 50);
                 float inLayerLength = Random.Range(m_InLayerLengthRange.x, m_InLayerLengthRange.y);
                 float inLayerHeight = Random.Range(m_InLayerHeightRange.x, m_InLayerHeightRange.y);
@@ -111,8 +142,8 @@ public class CharacterTrail : MonoBehaviour
                     Vector2 right = new Vector2(-inLayerWidth/2.0f, y);
                     left = RotateV2(left, deg);
                     right = RotateV2(right, deg);
-                    vertices[lineCount] = new Vector3(left.x, left.y, -x);
-                    vertices[lineCount + 1] = new Vector3(right.x, right.y, -x);
+                    vertices[lineCount] = new Vector3(left.x, left.y, -x) + m_Offset;
+                    vertices[lineCount + 1] = new Vector3(right.x, right.y, -x) + m_Offset;
 
                     // UV
                     float uvY = 1.0f/((float)m_InLayoutYDiv) * (float)(yDiv + 1);
@@ -141,7 +172,7 @@ public class CharacterTrail : MonoBehaviour
             for( int oLC = m_InLayerCount; oLC < (m_InLayerCount + m_OutLayerCount); oLC++ )
             {
                 int segCount = (oLC- m_InLayerCount) * outSegVertCount + inVertCount;
-                vertices[segCount] = Vector3.zero;
+                vertices[segCount] = m_Offset;
                 int randomInt = Random.Range(0, 50);
                 float outLayerLength = Random.Range(m_OutLayerLengthRange.x, m_OutLayerLengthRange.y);
                 float outLayerHeight = Random.Range(m_OutLayerHeightRange.x, m_OutLayerHeightRange.y);
@@ -161,8 +192,8 @@ public class CharacterTrail : MonoBehaviour
                     Vector2 right = new Vector2(-outLayerWidth/2.0f, y);
                     left = RotateV2(left, deg);
                     right = RotateV2(right, deg);
-                    vertices[lineCount] = new Vector3(left.x, left.y, -x);
-                    vertices[lineCount + 1] = new Vector3(right.x, right.y, -x);
+                    vertices[lineCount] = new Vector3(left.x, left.y, -x) + m_Offset;
+                    vertices[lineCount + 1] = new Vector3(right.x, right.y, -x) + m_Offset;
 
                     // UV
                     float uvY = 1.0f/((float)m_OutLayoutYDiv) * (float)(yDiv + 1);
@@ -235,6 +266,7 @@ public class CharacterTrail : MonoBehaviour
             mesh.uv = uvs;
             mesh.triangles = triangleIndices;
             mesh.RecalculateNormals();
+            SetMaterial();
             Debug.Log(string.Format("Vert:{0}, Tri:{1}", vertices.Length, triangleIndices.Length/3));
         }
         Reactivate();
@@ -275,5 +307,71 @@ public class CharacterTrail : MonoBehaviour
         v.x = (cos * tx) - (sin * ty);
         v.y = (sin * tx) + (cos * ty);
         return v;
+    }
+
+    private void SetMaterial()
+    {
+        if(m_SharedMaterial != null)
+        {
+            Material materialInstance = Instantiate<Material>(m_SharedMaterial);
+            if(m_MeshRenderer.sharedMaterials.Length < 1)
+            {
+                m_MeshRenderer.sharedMaterials = new Material[] {materialInstance};
+            }
+            else
+            {
+                m_MeshRenderer.sharedMaterials[0] = materialInstance;
+            }
+        }
+    }
+
+    private IEnumerator TrailDirectionUpdate()
+    {
+        float oldResult = 0.0f;
+        while(true)
+        {
+            Vector3 currentForward = transform.forward;
+
+            if(m_MeshRenderer.sharedMaterials[0])
+            {
+                if(m_MeshRenderer.sharedMaterials[0].HasProperty(m_MaterialProperty))
+                {
+                    Vector3 dividend = new Vector3(0.0f, 0.0f, 0.0f);
+                    float divider = 0;
+                    float multiplier;
+                    
+                    // Division
+                    for(int i = 0; i < m_TrailLength; i++)
+                    {
+                        multiplier = Mathf.Pow((float)(i + 1), m_Damping);
+                        dividend += m_Directions[i]  * multiplier;
+                        divider += multiplier;
+                    }
+                    dividend = dividend / divider;
+
+                    float result = Quaternion.FromToRotation(dividend, currentForward).eulerAngles.y;
+                    result += Mathf.Sin(m_Time/m_TimeLoop * Mathf.PI * 2.0f) * m_WaveIntensity;
+                    m_MeshRenderer.sharedMaterials[0].SetFloat(m_MaterialProperty, result);
+                }
+            }
+
+            if(m_Time >= m_TimeLoop)
+            {
+                m_Time = 0.0f;
+            }
+            else
+            {
+                m_Time += m_Tick;
+            }
+
+            // Update Queue
+            for(int i = 1; i < m_TrailLength; i++)
+            {
+                m_Directions[i - 1] = m_Directions[i];
+            }
+            m_Directions[m_TrailLength-1] = currentForward;
+
+            yield return new WaitForSeconds(m_TimeTick);
+        }
     }
 }
