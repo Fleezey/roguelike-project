@@ -14,6 +14,11 @@ namespace FGSX.Traps.Spikes
 
         public override IEnumerator Start()
         {
+            if (m_Spikes.AlwaysActive)
+            {
+                yield break;
+            }
+            
             m_Spikes.StartCoroutine(AnimateSpikes());
             yield return new WaitForSeconds(1f);
 

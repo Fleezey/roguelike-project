@@ -6,8 +6,10 @@ namespace FGSX.Traps.Spikes
     public class Spikes : StateMachine
     {
         public float Damage => m_Damage;
+        public bool AlwaysActive => m_AlwaysActive;
 
         [SerializeField] private float m_Damage = 1f;
+        [SerializeField] private bool m_AlwaysActive = false;
 
         [Header("Shader Properties")]
         [SerializeField] private int m_SpikeMaterialIndex;
@@ -27,7 +29,14 @@ namespace FGSX.Traps.Spikes
 
         private void Start()
         {
-            SetState(new Idle(this));
+            if (m_AlwaysActive)
+            {
+                SetState(new Activated(this));
+            }
+            else
+            {
+                SetState(new Idle(this));
+            }
         }
 
         private void OnTriggerStay(Collider collider)
