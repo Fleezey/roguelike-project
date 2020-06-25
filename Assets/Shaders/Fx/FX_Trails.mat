@@ -28,9 +28,10 @@ Material:
         m_Scale: {x: 2, y: 0.5}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaBackMult: 0
     - _Amplitude: 0.4
     - _AnimationSpeed: 1.98
-    - _DirectionFrom: 3.2920291
+    - _DirectionFrom: 0.6279052
     - _DirectionMult: 0.75
     - _DirectionPow: 2
     - _Displacement: 2
@@ -78,7 +79,7 @@ Material:
     - _UvLightAdd: 0.285
     - _UvYPow: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.10835719, b: 1, a: 1}
+    - _Color: {r: 0.042530775, g: 1, b: 0, a: 0}
     - _DirectionFrom: {r: 2.83, g: 0, b: 0, a: 5}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _FireScale: {r: 1, g: 1, b: 1, a: 1}
@@ -86,7 +87,7 @@ Material:
     - _FireWiggleSpeed: {r: 1, g: 1, b: 1, a: 1}
     - _MaskIntensity: {r: 2, g: 1, b: 1, a: 1.5}
     - _UvAlpha: {r: 2, g: 1, b: 5, a: 3}
-    - _UvLight: {r: 20, g: 5, b: 3.75, a: 1}
+    - _UvLight: {r: 20, g: 2, b: 3.75, a: 0.75}
     - _WaveDisplacement: {r: 1, g: 1.65, b: 2, a: 0}
     - _WaveDisplacementBiTan: {r: 0.5, g: 4, b: 2, a: -0.5}
     - _WaveDisplacementNorm: {r: 0.25, g: 3, b: 3, a: 0}

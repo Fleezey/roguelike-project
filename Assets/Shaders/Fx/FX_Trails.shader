@@ -31,6 +31,8 @@
         _UvAlphaFrontMult ("Length Alpha Front Multiplier", float) = 1.0
         [VerticalBoxEnd]_LineEnd("",int) = 0
 
+        _AlphaBackMult ("Length Back Alpha Multiplier", Range(0.0, 1.0)) = 1.0
+
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Blend Source", Float) = 1
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Blend Destination", Float) = 0
     }
@@ -59,7 +61,7 @@
         float _DisplacementNorm, _DisplacementBiTan, _DirectionFrom, _DirectionPow, _DirectionMult, _TightEnd;
 
         float4 _UvLight, _UvAlpha;
-        float _UvAlphaMult, _UvAlphaFrontPow, _UvAlphaFrontMult;
+        float _UvAlphaMult, _UvAlphaFrontPow, _UvAlphaFrontMult, _AlphaBackMult;
 
         float random (float2 uv)
         {
@@ -147,6 +149,7 @@
                 // Front Alpha
                 col.a *= saturate(pow(i.uv.y, _UvAlphaFrontPow) * pow(_UvAlphaFrontMult, _UvAlphaFrontPow));
                 col.a = saturate(col.a) * _UvAlphaMult;
+                col.a *= 1.0 - pow(i.uv.y + _AlphaBackMult, 10.0);
                 return saturate(col);
             }
             ENDCG

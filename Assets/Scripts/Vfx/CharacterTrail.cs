@@ -10,39 +10,40 @@ public class CharacterTrail : MonoBehaviour
     [Header("Base Properties")]
     [SerializeField] private string m_MeshName = "Character Trail";
     [SerializeField] private bool m_RandomizeUvX = false;
-    [SerializeField] private Vector3 m_Offset = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField] private Vector3 m_Offset = new Vector3(0.0f, 0.0f, 0.2f);
     [SerializeField] private Material m_SharedMaterial = default;
 
     [Header("In Layer Properties")]
-    [SerializeField] private int m_InLayerCount = 8;
-    [SerializeField] private int m_InLayoutYDiv = 5;
-    [SerializeField] private Vector2 m_InLayerWidthRange = new Vector2(1.0f, 0.5f);
-    [SerializeField] private Vector2 m_InLayerHeightRange = new Vector2(1.0f, 1.0f);
-    [SerializeField] private Vector2 m_InLayerLengthRange = new Vector2(10.0f, 12.0f);
+    [SerializeField] private int m_InLayerCount = 10;
+    [SerializeField] private int m_InLayoutYDiv = 10;
+    [SerializeField] private Vector2 m_InLayerWidthRange = new Vector2(0.25f, 0.5f);
+    [SerializeField] private Vector2 m_InLayerHeightRange = new Vector2(0.15f, 0.25f);
+    [SerializeField] private Vector2 m_InLayerLengthRange = new Vector2(1.0f, 1.5f);
     [SerializeField] private float m_InWaveLength = 1.0f;
-    [SerializeField] private float m_InWaveExp = 10.0f;
+    [SerializeField] private float m_InWaveExp = 0.5f;
     [SerializeField] private float m_InWaveScale = 1.0f;
     [Range(0.0f, 1.0f)]
     [SerializeField] private float m_InTighterTip = 1.0f;
 
     [Header("Out Layer Properties")]
-    [SerializeField] private int m_OutLayerCount = 8;
-    [SerializeField] private int m_OutLayoutYDiv = 5;
-    [SerializeField] private Vector2 m_OutLayerWidthRange = new Vector2(1.0f, 0.5f);
-    [SerializeField] private Vector2 m_OutLayerHeightRange = new Vector2(1.0f, 1.0f);
-    [SerializeField] private Vector2 m_OutLayerLengthRange = new Vector2(2.0f, 3.0f);
+    [SerializeField] private int m_OutLayerCount = 10;
+    [SerializeField] private int m_OutLayoutYDiv = 10;
+    [SerializeField] private Vector2 m_OutLayerWidthRange = new Vector2(0.2f, 0.3f);
+    [SerializeField] private Vector2 m_OutLayerHeightRange = new Vector2(0.25f, 0.35f);
+    [SerializeField] private Vector2 m_OutLayerLengthRange = new Vector2(0.4f, 1.0f);
     [SerializeField] private float m_OutWaveLength = 1.0f;
-    [SerializeField] private float m_OutWaveExp = 10.0f;
+    [SerializeField] private float m_OutWaveExp = 0.5f;
     [SerializeField] private float m_OutWaveScale = 1.0f;
     [Range(0.0f, 1.0f)]
-    [SerializeField] private float m_OutTighterTip = 1.0f;
+    [SerializeField] private float m_OutTighterTip = 0.65f;
 
     [Header("Create")]
     [SerializeField] private bool m_Generate = false;
     [SerializeField] private float m_Value = default;
 
     [Header("Animation Properties")]
-    [SerializeField] private string m_MaterialProperty = "_DirectionFrom";
+    [SerializeField] private string m_MaterialPropertyDirectionFrom = "_DirectionFrom";
+    [SerializeField] private string m_MaterialPropertyBackMultiplier = "_AlphaBackMult";
     [SerializeField] private float m_TimeTick = default;
     [SerializeField] private float m_Tick = default;
     [SerializeField] private float m_TimeLoop = default;
@@ -70,8 +71,6 @@ public class CharacterTrail : MonoBehaviour
         {
             m_MeshFilter = GetComponent<MeshFilter>();
         }
-
-        GenerateMesh();
     }
 
     private void Update()
@@ -91,6 +90,7 @@ public class CharacterTrail : MonoBehaviour
             m_Directions[i] = transform.forward;
         }
 
+        GenerateMesh();
         StartCoroutine(TrailDirectionUpdate());
     }
 
@@ -328,17 +328,24 @@ public class CharacterTrail : MonoBehaviour
     private IEnumerator TrailDirectionUpdate()
     {
         float oldResult = 0.0f;
+        Vector3 dividend = new Vector3(0.0f, 0.0f, 0.0f);
+        float divider = 0;
+        float multiplier;
+        float result;
+        float backDistance;
+
+        RaycastHit BackHit;
+
         while(true)
         {
             Vector3 currentForward = transform.forward;
 
             if(m_MeshRenderer.sharedMaterials[0])
             {
-                if(m_MeshRenderer.sharedMaterials[0].HasProperty(m_MaterialProperty))
+                if(m_MeshRenderer.sharedMaterials[0].HasProperty(m_MaterialPropertyDirectionFrom))
                 {
-                    Vector3 dividend = new Vector3(0.0f, 0.0f, 0.0f);
-                    float divider = 0;
-                    float multiplier;
+                    dividend = new Vector3(0.0f, 0.0f, 0.0f);
+                    divider = 0;
                     
                     // Division
                     for(int i = 0; i < m_TrailLength; i++)
@@ -349,9 +356,21 @@ public class CharacterTrail : MonoBehaviour
                     }
                     dividend = dividend / divider;
 
-                    float result = Quaternion.FromToRotation(dividend, currentForward).eulerAngles.y;
+                    result = Quaternion.FromToRotation(dividend, currentForward).eulerAngles.y;
                     result += Mathf.Sin(m_Time/m_TimeLoop * Mathf.PI * 2.0f) * m_WaveIntensity;
-                    m_MeshRenderer.sharedMaterials[0].SetFloat(m_MaterialProperty, result);
+                    m_MeshRenderer.sharedMaterials[0].SetFloat(m_MaterialPropertyDirectionFrom, result);
+                }
+
+                if(m_MeshRenderer.sharedMaterials[0].HasProperty(m_MaterialPropertyBackMultiplier))
+                {
+                    if(Physics.Raycast(transform.position, transform.forward * -1.0f, out BackHit))
+                    {
+                        if(BackHit.collider.gameObject.layer == 8)
+                        {
+                            backDistance = Mathf.Clamp(1.0f - ((BackHit.distance + m_Offset.z) / (m_InLayerLengthRange.y)), 0.0f, 1.0f);
+                            m_MeshRenderer.sharedMaterials[0].SetFloat(m_MaterialPropertyBackMultiplier, backDistance);
+                        }
+                    }
                 }
             }
 
