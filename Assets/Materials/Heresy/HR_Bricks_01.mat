@@ -228,7 +228,7 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LightMapIntensity: 10
+    - _LightMapIntensity: 1
     - _LightMapPower: 1
     - _LightMapShadowIntensity: 1
     - _LightingEnd: 0
@@ -248,12 +248,12 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
     - _RefractionModel: 0
-    - _RimAmount: 0.26
-    - _RimIntensity: 2
+    - _RimAmount: 0
+    - _RimIntensity: 0
     - _RimLightEnd: 0
     - _RimLightStart: 0
-    - _RimThreshold: 0.17
-    - _Roughness: 1
+    - _RimThreshold: 0
+    - _Roughness: 0.5
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1
