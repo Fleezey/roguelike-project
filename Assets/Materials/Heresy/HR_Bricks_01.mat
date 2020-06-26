@@ -47,7 +47,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _AlbedoMap:
         m_Texture: {fileID: 2800000, guid: 513db1c85f4737d47a32eb28001aa2b1, type: 3}
-        m_Scale: {x: 3, y: 0.5}
+        m_Scale: {x: 3, y: 0.4}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
@@ -253,7 +253,7 @@ Material:
     - _RimLightEnd: 0
     - _RimLightStart: 0
     - _RimThreshold: 0
-    - _Roughness: 0.5
+    - _Roughness: 0.6
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1
