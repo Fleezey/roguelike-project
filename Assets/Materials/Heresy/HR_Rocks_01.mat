@@ -254,7 +254,7 @@ Material:
     - _RimLightEnd: 0
     - _RimLightStart: 0
     - _RimThreshold: 0.09
-    - _Roughness: 1
+    - _Roughness: 0.5
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1

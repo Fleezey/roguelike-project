@@ -224,7 +224,7 @@ p2sBasic fragBasicCalc (v2fBasic vs, fragVars vars, float2 uv)
     float metallic = lerp(0.0, 1.0, aRMMap.b * vars.metallic);
     half3 specularMap;
     float alpha = albedoMap.a * vars.color.a;
-    float roughness = aRMMap.g * (2.0 - vars.roughness);
+    float roughness = aRMMap.g * (1.0 - vars.roughness);
     float3 emission = emissionMap.rgb * vars.emissionIntensity * vars.emissionColorGain * vars.emissionColor.rgb * vars.emissionColor.a;
 
     // Calculate albedo and spec
