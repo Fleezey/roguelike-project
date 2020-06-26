@@ -47,7 +47,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _AlbedoMap:
         m_Texture: {fileID: 2800000, guid: cf5b51372afd914438de756d15c82935, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
@@ -170,7 +170,7 @@ Material:
     - _AmbientPow: 1
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _BumpIntensity: 1.33
+    - _BumpIntensity: 1
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -255,7 +255,7 @@ Material:
     - _RimLightEnd: 0
     - _RimLightStart: 0
     - _RimThreshold: 0.2
-    - _Roughness: 0.5
+    - _Roughness: 1
     - _SSRefractionProjectionModel: 0
     - _Shininess: 10
     - _Smoothness: 1
