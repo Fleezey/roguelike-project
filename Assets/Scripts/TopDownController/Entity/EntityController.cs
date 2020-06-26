@@ -7,7 +7,7 @@ namespace FGSX.TopDownController.Entity
     [RequireComponent(typeof (CharacterController))]
     public class EntityController : MonoBehaviour
     {
-        [SerializeField] private float m_MoveSpeed = 8f;
+        [SerializeField] private float m_MoveSpeed = 6.5f;
         [SerializeField] private float m_GravityScale = 1f;
 
         private CharacterController m_CharacterController;

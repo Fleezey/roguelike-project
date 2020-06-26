@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9dd952ad4d11e46a99593e705e5f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 8
+  m_MoveSpeed: 6.5
   m_GravityScale: 1
 --- !u!114 &5973705685019932066
 MonoBehaviour:
@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 2014443698822282598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8042330418386223242}
   m_RootOrder: 0
@@ -489,33 +489,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MeshName: Character Trail
   m_RandomizeUvX: 1
-  m_Offset: {x: 0, y: 0, z: 0}
+  m_Offset: {x: 0, y: 0, z: 0.2}
   m_SharedMaterial: {fileID: 2100000, guid: 08e97de0363ad6944bbf0237e96aba22, type: 2}
   m_InLayerCount: 10
   m_InLayoutYDiv: 10
-  m_InLayerWidthRange: {x: 0.125, y: 0.3}
-  m_InLayerHeightRange: {x: 0.125, y: 0.125}
-  m_InLayerLengthRange: {x: 0.5, y: 0.75}
+  m_InLayerWidthRange: {x: 0.25, y: 0.5}
+  m_InLayerHeightRange: {x: 0.15, y: 0.25}
+  m_InLayerLengthRange: {x: 1, y: 1.5}
   m_InWaveLength: 1
   m_InWaveExp: 0.5
   m_InWaveScale: 1
   m_InTighterTip: 1
   m_OutLayerCount: 10
   m_OutLayoutYDiv: 10
-  m_OutLayerWidthRange: {x: 0.1, y: 0.15}
-  m_OutLayerHeightRange: {x: 0.125, y: 0.2}
-  m_OutLayerLengthRange: {x: 0.2, y: 0.5}
+  m_OutLayerWidthRange: {x: 0.2, y: 0.3}
+  m_OutLayerHeightRange: {x: 0.25, y: 0.35}
+  m_OutLayerLengthRange: {x: 0.4, y: 1}
   m_OutWaveLength: 1
   m_OutWaveExp: 0.5
   m_OutWaveScale: 1
   m_OutTighterTip: 0.65
   m_Generate: 0
   m_Value: 0
-  m_MaterialProperty: _DirectionFrom
+  m_MaterialPropertyDirectionFrom: _DirectionFrom
+  m_MaterialPropertyBackMultiplier: _AlphaBackMult
   m_TimeTick: 0.01
   m_Tick: 0.01
   m_TimeLoop: 4
-  m_WaveIntensity: 30
+  m_WaveIntensity: 10
   m_TrailLength: 50
   m_Damping: 1
 --- !u!108 &494442246206674675
@@ -529,9 +530,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.31459808, g: 0, b: 1, a: 1}
-  m_Intensity: 3.1097784
-  m_Range: 15.548891
+  m_Color: {r: 0.042530775, g: 1, b: 0, a: 0}
+  m_Intensity: 3.529998
+  m_Range: 3.5099993
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -591,10 +592,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c20b1ffe255ab54694252c2a83fbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LightIntensityRange: {x: 2, y: 4}
-  m_LightRangeRange: {x: 10, y: 20}
+  m_LightIntensityRange: {x: 2, y: 5}
+  m_LightRangeRange: {x: 3, y: 4}
   m_Tick: 0.01
   m_TimeTick: 0.01
+  m_Color: {r: 0.042530775, g: 1, b: 0, a: 0}
 --- !u!1 &3153189667187123501
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +656,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9653250bb0537244aa3be7355be54b07, type: 2}
+  - {fileID: 2100000, guid: 3dfe077cd41562446a88f19ef8828a00, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -687,6 +689,7 @@ GameObject:
   - component: {fileID: 5258055706171639868}
   - component: {fileID: 5258055706171639869}
   - component: {fileID: 5258055706171639857}
+  - component: {fileID: 1703307490}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -777,6 +780,24 @@ MonoBehaviour:
   m_OffsetMaxDistance: 5
   m_OffsetPercentage: 0.25
   m_OffsetSmoothTime: 0.15
+--- !u!114 &1703307490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258055706171639870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c9ebc214b0141c6a6ecf1e7443f3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloomShader: {fileID: 4800000, guid: 926e8db920ab84661b115e2bdbc8199b, type: 3}
+  intensity: 0
+  iterations: 4
+  threshold: 1
+  softThreshold: 0.5
+  debug: 0
 --- !u!1 &7277267202732845442
 GameObject:
   m_ObjectHideFlags: 0
