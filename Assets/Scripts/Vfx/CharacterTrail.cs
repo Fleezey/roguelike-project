@@ -71,14 +71,7 @@ public class CharacterTrail : MonoBehaviour
         {
             m_MeshFilter = GetComponent<MeshFilter>();
         }
-    }
-
-    private void Update()
-    {
-        if(m_Generate)
-        {
-            GenerateMesh();
-        }
+        GenerateMesh();
     }
 
     private void Start()
@@ -269,14 +262,6 @@ public class CharacterTrail : MonoBehaviour
             SetMaterial();
             Debug.Log(string.Format("Vert:{0}, Tri:{1}", vertices.Length, triangleIndices.Length/3));
         }
-        Reactivate();
-    }
-
-    // Reactivate generate button
-    private void Reactivate()
-    {
-        StartCoroutine(WaitToReturn(1.0f));
-        m_Generate = false; 
     }
 
     // Create and set mesh
