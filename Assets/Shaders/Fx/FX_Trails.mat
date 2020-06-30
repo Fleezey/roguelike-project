@@ -31,7 +31,7 @@ Material:
     - _AlphaBackMult: 0
     - _Amplitude: 0.4
     - _AnimationSpeed: 1.98
-    - _DirectionFrom: 0.3141076
+    - _DirectionFrom: 9.3544445
     - _DirectionMult: 0.75
     - _DirectionPow: 2
     - _Displacement: 2
